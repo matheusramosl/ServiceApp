@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import context from '../../context/context'
+import PackageItem from '../Services/PackageItem'
 
 export default function PackagesComponent() {
     const { selectOptions, setSelectedOptions} = useContext(context)
@@ -27,18 +28,19 @@ export default function PackagesComponent() {
     }
     return (
     <div className='flex flex-col gap-6'>
-      <div className='flex justify-between w-full self-center'>
+      <div className='flex justify-between w-11/12 self-center'>
         <select   className='w-3/4 rounded' onChange={(e) => handleChange(e.target) }>
           <option value={''}>Select Package</option>
           {options2.map((i) => <option value={i.Name}>{i.Name}</option>)}
         </select>
           <button className={`text-blue-600 hover:text-blue-800`} disabled={packages === ''} onClick={() => handleClick()}>+ Add Package</button>
       </div>
-      <div className='flex justify-evenly'>
-      <div className='border-2 bg-white shadow-lg w-[450px] h-[300px] self-center'>
-      {selectOptions.filter((i) => i.Type ==='package').map((i) => <p>{i.Name}</p>)}
-      </div>
-      </div>
+      <div className='flex items-center justify-center'>
+        <div className=' bg-white shadow-lg w-11/12'>
+            {selectOptions.filter((i) => i.Type === 'package').length > 0 ? selectOptions.filter((i) => i.Type === 'package').map(({Name, Amount}) => <PackageItem props={{Name, Amount }} />) : <p className='ml-10'>No Package Selected</p>}
+
+        </div>
+    </div>
     </div>
   )
 }

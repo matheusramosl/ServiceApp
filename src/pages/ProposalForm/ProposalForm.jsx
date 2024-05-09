@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import context from '../../context/context';
+import { useNavigate } from 'react-router-dom';
 
 function ProposalForm() {
+  const [state,setState] = useState('')
+  const {setProposalName} = useContext(context)
+  let navigate = useNavigate();
+  const submitBtn = () => {
+    setProposalName(state)
+    navigate('/services')
+  }
   return (
     <div className="bg-white shadow-lg rounded-lg p-8 w-3/6">
       <div className="mb-4">
         <label htmlFor="proposalName" className="block text-sm font-medium text-gray-700">Proposal name</label>
-        <input type="text" id="proposalName" placeholder="Untitled Proposal" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"/>
+        <input type="text" id="proposalName" placeholder="Untitled Proposal" value={state} onChange={({target}) => setState(target.value) } className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"/>
       </div>
       
       <div className="mb-4">
@@ -39,7 +48,7 @@ function ProposalForm() {
       </div>
 
       <div className="flex items-center justify-end">
-        <button className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-2 px-4 rounded">Submit</button>
+        <button className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-2 px-4 rounded" onClick={() => submitBtn()}>Submit</button>
       </div>
 
     </div>

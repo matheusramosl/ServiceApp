@@ -30,7 +30,7 @@ export default function Presentation() {
   const verifyComponent = () => {
     switch (serviceType) {
       case 'all':
-        return (<div className='flex gap-10'>
+        return (<div className=''>
           <ServicesComponent />
           <PackagesComponent />
         </div>);

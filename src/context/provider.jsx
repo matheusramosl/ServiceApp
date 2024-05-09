@@ -3,6 +3,7 @@ import context from './context';
 
 export default function Provider({ children }) {
   const [darkMode, setDarkMode] = useState(true);
+  const [proposalName, setProposalName] = useState('Untitled Proposal')
   const [options, setOptions] = useState([
     'aaaaaa',
     'bbbbbb',
@@ -18,7 +19,8 @@ export default function Provider({ children }) {
     options,
     setOptions,
     selectOptions, setSelectedOptions,
-    serviceType, setServiceType
+    serviceType, setServiceType,
+    proposalName, setProposalName
   };
   return (
     <context.Provider value={ value }>
