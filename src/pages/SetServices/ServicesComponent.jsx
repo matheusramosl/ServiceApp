@@ -10,7 +10,7 @@ export default function ServicesComponent() {
   }
   const handleClick = () => {
       setSelectedOptions([...selectOptions, options.find((i) => i.Name === services) ])
-  
+      setServices('');
   }
   const options = [
     {
@@ -27,11 +27,11 @@ export default function ServicesComponent() {
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex justify-between w-11/12 self-center'>
-    <select className='w-3/4 rounded' onChange={(e) => handleChange(e.target) } >
+    <select className='w-1/4 rounded border border-gray-300 transition-colors hover:scale-105 hover:bg-gray-100' value={services} onChange={(e) => handleChange(e.target) } >
       <option value={''}>Select Service</option>
     {options.map((i) => <option value={i.Name} >{i.Name}</option>)}
     </select>
-      <button className="text-blue-600 hover:text-blue-800" disabled={services === ''} onClick={() => handleClick()}>+ Add service</button>
+      <button className={`text-blue-600 hover:scale-105 hover:text-blue-800 ${services === '' ? 'cursor-not-allowed' : ''}`} disabled={services === ''} onClick={() => handleClick()}>+ Add service</button>
       </div>
       <div className='flex items-center justify-center'>
         <div className=' bg-white shadow-lg w-11/12'>

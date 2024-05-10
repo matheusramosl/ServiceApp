@@ -5,7 +5,9 @@ function PackageItem({props}) {
   const serviceList = [
    'Business Formation',
    '1099',
-   'Annual Report'
+   'Annual Report USA',
+   'Registered Agent USA',
+   'Corporate Accounting USA'
   ]
   return (
     <div className="bg-white p-4 shadow">

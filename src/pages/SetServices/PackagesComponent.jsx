@@ -24,16 +24,16 @@ export default function PackagesComponent() {
     const handleClick = () => {
         console.log(packages);
         setSelectedOptions([...selectOptions, options2.find((i) => i.Name === packages) ])
-  
+        setPackages('');
     }
     return (
     <div className='flex flex-col gap-6'>
-      <div className='flex justify-between w-11/12 self-center'>
-        <select   className='w-3/4 rounded' onChange={(e) => handleChange(e.target) }>
+      <div className='flex justify-between w-11/12 self-center pt-4'>
+        <select className='w-1/4 rounded border border-gray-300 transition-colors hover:scale-105 hover:bg-gray-100' value={packages} onChange={(e) => handleChange(e.target) }>
           <option value={''}>Select Package</option>
           {options2.map((i) => <option value={i.Name}>{i.Name}</option>)}
         </select>
-          <button className={`text-blue-600 hover:text-blue-800`} disabled={packages === ''} onClick={() => handleClick()}>+ Add Package</button>
+          <button className={`text-blue-600 hover:scale-105 hover:text-blue-800 ${packages === '' ? 'cursor-not-allowed' : ''}`} disabled={packages === ''} onClick={() => handleClick()}>+ Add Package</button>
       </div>
       <div className='flex items-center justify-center'>
         <div className=' bg-white shadow-lg w-11/12'>
