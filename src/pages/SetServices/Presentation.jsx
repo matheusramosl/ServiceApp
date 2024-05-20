@@ -72,9 +72,6 @@ export default function Presentation() {
 
       {verifyComponent()}
 
-      {/* <ServicesComponent handleChange={handleChange} options={options} handleClick={handleClick} />
-
-        <PackagesComponent handleChange={handleChange} options={options} handleClick={handleClick} /> */}
       </div>
 
 
