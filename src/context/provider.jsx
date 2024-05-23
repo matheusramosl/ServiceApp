@@ -11,15 +11,20 @@ export default function Provider({ children }) {
   ]);
   const [selectOptions, setSelectedOptions] = useState([
   ])
+  const [selectOptionsPackage, setselectOptionsPackage] = useState([
+  ])
   const [serviceType, setServiceType] = useState('')
-
+  const [packageType, setpackageType] = useState('')
+  
   const value = {
     darkMode,
     setDarkMode,
     options,
     setOptions,
     selectOptions, setSelectedOptions,
+    selectOptionsPackage, setselectOptionsPackage,
     serviceType, setServiceType,
+    packageType, setpackageType,
     proposalName, setProposalName
   };
   return (

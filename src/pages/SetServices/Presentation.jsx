@@ -31,29 +31,37 @@ export default function Presentation() {
     return allPackages + allServices
 } 
 
+  // const verifyComponent = () => {
+  //   switch (serviceType) {
+  //     case 'all':
+  //       return (<div className='w-11/12'>
+  //         <ServicesComponent />
+  //         <PackagesComponent />
+  //       </div>);
+  //       case 'service': 
+  //         return (<div className='w-11/12'>
+  //         <ServicesComponent  />
+  //         </div>);
+  //       case 'package':
+  //         return (<div className='w-11/12'>
+  //         <PackagesComponent  />
+  //         </div>);
+  //       default:
+  //         return <ModalComponent />
+  //   }
+  // }
   const verifyComponent = () => {
-    switch (serviceType) {
-      case 'all':
-        return (<div className='w-11/12'>
-          <ServicesComponent />
-          <PackagesComponent />
-        </div>);
-        case 'service': 
-          return (<div className='w-11/12'>
-          <ServicesComponent  />
-          </div>);
-        case 'package':
-          return (<div className='w-11/12'>
-          <PackagesComponent  />
-          </div>);
-        default:
-          return <ModalComponent />
-    }
-  }
+    return (<div className='w-11/12'>
+      <ServicesComponent />
+      <PackagesComponent />
+    </div>);
+
+}
 
   const resetButton = () => {
     setServiceType('')
     setSelectedOptions([])
+
   }
 
   return (
@@ -77,7 +85,7 @@ export default function Presentation() {
 
 
       </div>
-      {!(serviceType === '') && <button onClick={() => resetButton()} className=" w-1/12 self-center transition-all bg-drummond-primary text-white hover:bg-drummond-secondary-400 font-bold rounded py-2 px-4 ">Reset</button>}
+      {<button onClick={() => resetButton()} className=" w-1/12 self-center transition-all bg-drummond-primary text-white hover:bg-drummond-secondary-400 font-bold rounded py-2 px-4 ">Reset</button>}
       </div>
 
   )

@@ -77,6 +77,10 @@ function ProposalForm() {
         <button onClick={() => removeSigaory(i)}>x</button>
       </div>)}
 
+      <div className="mb-4">
+        <label htmlFor="proposalName" className="block text-sm font-medium text-gray-700">Currency</label>
+        <input type="text" id="proposalName" name='proposalName' placeholder="USD" value={state.proposalName} onChange={(e) => handleChange(e) } className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"/>
+      </div>
       
 
       <div className="flex items-center justify-end">
