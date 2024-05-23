@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Navbar from '../../components/NavBar'
 import StepsBar from '../../components/StepsBar'
 import ServiceItem from './ServiceItem'
 import context from '../../context/context'
 import PackageItem from './PackageItem'
+import { handleZohoRequest } from '../../requests/handleZohoRequests'
 
 
 export default function Services() {
@@ -14,6 +15,7 @@ export default function Services() {
         const allPackages = selectOptions.filter((i) => i.Type === 'package').reduce((acc, curr) => curr.Amount + acc, 0)
         return allPackages + allServices
     } 
+
   return (
     <div className='flex flex-col gap-10'>
     <Navbar />
