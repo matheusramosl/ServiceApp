@@ -20,11 +20,11 @@ const getAllServices = async () => {
     Year: 2024,
     Type: 'service',
     Recurrence: i.Recurrence || 'Recurrence', 
-    Parent: i.Parent_Account || 'Parent_Account',
+    Parent: i.Service_Account || 'Service_Account',
     serviceAccount: i.Service_Account || 'Service_Account',
     paymentTerms: i.Payment_Terms || 'Payment_Terms',
     usState: i.US_State || 'US_State',
-    competenceYear: i.Competence_Year || 'Competence_Year',
+    competenceYear: i.Competence_Year || '2024',
     executionYear: i.Execution_Year || '2024',
     providers: i.Service_Provider1 || ['Drummond CPA LLC'],
     quantity: 1

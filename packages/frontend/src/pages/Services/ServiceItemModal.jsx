@@ -8,61 +8,102 @@ function ServiceItemModal({props}) {
         <div className="text-gray-800 font-semibold">{Name}</div>
         
       </div>
-      <div className="items-center ">
-        <div className="col-span-11 mb-6">
-          <label htmlFor="service" className="sr-only">Service</label>
-          <select id="service" className=" rounded form-select block w-full mt-1 border-gray-300 shadow-sm">
-            <option>{props.serviceAccount}</option>
+
+        <div className='flex flex-wrap'>
+
+
+        <div className="col-span-11 mb-2 w-1/2">
+        <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">Service Account</span>
+          </div>
+          <select className="select select-bordered">
+            <option selected>{props.serviceAccount}</option>
           </select>
-        </div>
-        <div className="col-span-1 mb-6">
-          <label htmlFor="billing" className="sr-only">Billing Mode</label>
-          <select id="billing" className=" rounded form-select block w-full mt-1 border-gray-300 shadow-sm">
-            <option>{props.Recurrence}</option>
-          </select>
-        </div>
-        <div className="col-span-1 mb-6">
-          <label htmlFor="price" className="sr-only">Price</label>
-          <select id="price" className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm">
-            <option>{props.paymentTerms}</option>
-          </select>
+          </label>
         </div>
 
-        <div className="col-span-1 mb-6">
-          <label htmlFor="price" className="sr-only">Price</label>
-          <select id="price" className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm">
-            <option>{props.usState}</option>
+        <div className="col-span-1 mb-2 w-1/2">
+
+        <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">Recurrence</span>
+          </div>
+          <select className="select select-bordered">
+            <option selected>{props.Recurrence}</option>
           </select>
+          </label>
         </div>
 
-        <div className="col-span-1 mb-6">
-          <label htmlFor="price" className="sr-only">Price</label>
-          <select id="price" className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm">
-            <option>{props.competenceYear}</option>
+
+        <div className="col-span-1 mb-2 w-1/2">
+
+        <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">Payment Term</span>
+          </div>
+          <select className="select select-bordered">
+            <option selected>{props.paymentTerms}</option>
           </select>
+          </label>
         </div>
 
-        <div className="col-span-1 mb-6">
-          <label htmlFor="price" className="sr-only">Price</label>
-          <select id="price" className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm">
-            <option>{props.executionYear}</option>
+        <div className="col-span-1 mb-2 w-1/2">
+
+        <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">US State</span>
+          </div>
+          <select className="select select-bordered">
+            <option selected>{props.usState}</option>
           </select>
+          </label>
         </div>
-        <div className="col-span-1 mb-6">
-          <label htmlFor="price" className="sr-only">Price</label>
-          <select id="price" className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm">
+
+        <div className="col-span-1 mb-2 w-1/2">
+        <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">Competence Year</span>
+          </div>
+          <select className="select select-bordered">
+            <option selected>{props.competenceYear}</option>
+          </select>
+          </label>
+        </div>
+
+        <div className="col-span-1 mb-2 w-1/2">
+          <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">Execution Year</span>
+          </div>
+          <select className="select select-bordered">
+            <option selected>{props.executionYear}</option>
+          </select>
+          </label>
+        </div>
+
+        <div className="col-span-1 mb-2 w-1/2">
+
+        <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">Providers</span>
+          </div>
+          <select className="select select-bordered">
             {props.providers.map((i) => <option>{i}</option>)}
           </select>
+          </label>
         </div>
-        <div className="col-span-1 mb-6">
-          <label htmlFor="price" className="sr-only">Price</label>
-          <select id="price" className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm">
-            <option>{props.quantity}</option>
-          </select>
-        </div>
+        <div className="col-span-1 mb-2 w-1/2">
 
-        <div className="col-span-2 text-right">
-          <span>{`R$ ${Amount}`}</span>
+        <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">Amount</span>
+          </div>
+          <label className="input input-bordered flex items-center gap-2">
+            $
+            <input type="text" className="grow" placeholder="Amount" value={Amount} />
+          </label>
+          </label>
         </div>
       </div>
 

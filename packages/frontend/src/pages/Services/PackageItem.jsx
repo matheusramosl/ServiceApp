@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import DrawerServices from './DrawerServices'
+import context from '../../context/context'
 
 function PackageItem({props}) {
   const {Name, Amount} = props
-  const [serviceList, setServiceList] = useState(props.services.map((i) => i.Name) || [])
+  const {selectOptions} = useContext(context)
+  const [state, setState] = useState({
+    recurrence: props.recurrence
+  })
+
 
   return (
     <div className="bg-white p-4 shadow">
@@ -24,13 +29,15 @@ function PackageItem({props}) {
         <div className="col-span-1">
           <label htmlFor="billing" className="sr-only">Billing Mode</label>
           <select id="billing" className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm">
-            <option>{props.recurrence}</option>
+            <option>Annual</option>
+            <option>Monthly</option>
+            <option>One Off</option>
           </select>
         </div>
         <div className="col-span-1">
           <label htmlFor="price" className="sr-only">Price</label>
           <select id="price" className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm">
-            <option>{props.Year}</option>
+           {props.Year.map((i) => <option>{i}</option> )} 
           </select>
         </div>
         <div className="col-span-1 text-center">
@@ -42,7 +49,7 @@ function PackageItem({props}) {
         </div>
         <div className='flex flex-col'>
         <ul className='w-[300px]'>Services:</ul>
-        {serviceList.map((i) => <li className='w-[300px]'>{i}</li>)}
+        {(selectOptions.find((i) => i.Name === Name).services.map((i) => i.Name) || []).map((i) => <li className='w-[300px]'>{i}</li>)}
         </div>
       </div>
 

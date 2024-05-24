@@ -4,8 +4,8 @@ import PackageItem from '../Services/PackageItem'
 import { handleZohoRequest } from '../../requests/handleZohoRequests'
 
 export default function PackagesComponent() {
-    const { selectOptions, setSelectedOptions} = useContext(context)
-    const [options, setOptions] = useState([])
+    const { selectOptions, setSelectedOptions, optionsPackage, setOptionsPackage} = useContext(context)
+    
 
   const getAllServices = async () => {
     const packages = await handleZohoRequest('packages')
@@ -13,17 +13,17 @@ export default function PackagesComponent() {
     const packagesMapped = packages.packages.map((i) => ({
       Name: i.Packege_Name || 'Package_Name',
       Amount: i.Plan_Value || 'Plan_Value',
-      Year: 2024,
+      Year: [2024,2025,2026,2027,2028,2029,2030],
       Type: 'package',
       recurrence: i.Recurrence || 'Recurrence',
       description: i.Description || 'Description',
       currency: i.Currency || 'USD',
-      Parent: i.Parent_Account || 'Parent_Account',
+      Parent: i.Service_Account || 'Service_Account',
       quantity: 1,
       services: i.Plan_Services.map((i) => ({Name: i.Service.name, paymentTerm: i.Payment_Term, Description: i.Description || 'Description' }))
     }))
   console.log(packagesMapped)
-    setOptions(packagesMapped)
+  setOptionsPackage(packagesMapped)
     }
   
     useEffect(() => {
@@ -36,7 +36,7 @@ export default function PackagesComponent() {
     }
     const handleClick = () => {
         console.log(packages);
-        setSelectedOptions([...selectOptions, options.find((i) => i.Name === packages) ])
+        setSelectedOptions([...selectOptions, optionsPackage.find((i) => i.Name === packages) ])
         setPackages('');
     }
     return (
@@ -44,7 +44,7 @@ export default function PackagesComponent() {
       <div className='flex justify-between w-11/12 self-center pt-4'>
         <select className='w-1/4 rounded border border-gray-300 transition-colors hover:scale-105 hover:bg-gray-100' value={packages} onChange={(e) => handleChange(e.target) }>
           <option value={''}>Select Package</option>
-          {options.map((i) => <option value={i.Name}>{i.Name}</option>)}
+          {optionsPackage.map((i) => <option value={i.Name}>{i.Name}</option>)}
         </select>
           <button className={`text-blue-600 hover:scale-105 hover:text-blue-800 ${packages === '' ? 'cursor-not-allowed' : ''}`} disabled={packages === ''} onClick={() => handleClick()}>+ Add Package</button>
       </div>

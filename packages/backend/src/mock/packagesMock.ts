@@ -1,5 +1,6 @@
 const packagesMock = [
     {
+      Service_Account: 'Super Tech LTDA',
       Recurrence: "Monthly",
       Owner: {
         name: "Matheus Ramos",
@@ -56,7 +57,7 @@ const packagesMock = [
       Locked__s: false,
       Plan_Services: [
         {
-          Description: null,
+          Description: `Process: Company will be created according to the corporate structure and tax treatment is chosen solely by You. If You wish to have Drummond's advice on the most appropriate corporate and tax structure, please Contact Us and consider engaging the International Tax Planning service.`,
           Required: true,
           $in_merge: false,
           $field_states: null,
@@ -75,7 +76,7 @@ const packagesMock = [
           $zia_visions: null,
         },
         {
-          Description: null,
+          Description: "Bank Reference: Bank account opening is subject to local and international banking regulations and compliance. Drummond assumes no responsibility for Your failure to open the bank account due to current or future banking regulations or compliance, or due to the bank’s denial based on other reasons.",
           Required: true,
           $in_merge: false,
           $field_states: null,
@@ -94,7 +95,7 @@ const packagesMock = [
           $zia_visions: null,
         },
         {
-          Description: null,
+          Description: "Due diligence: Drummond may, from time to time, undertake independent due diligence on You for its internal purposes.",
           Required: false,
           $in_merge: false,
           $field_states: null,
@@ -113,7 +114,7 @@ const packagesMock = [
           $zia_visions: null,
         },
         {
-          Description: null,
+          Description: "New Entity Annual Maintenance: Company's formation in any US State generates obligations with it, like: the Annual Report and Registered Agent. These services are mandatory and essential to keep the company active in the State.",
           Required: false,
           $in_merge: false,
           $field_states: null,

@@ -8,6 +8,9 @@ const serviceMock = [
         "Drummond CPA LLC",
       ],
       Unit_Price: 600,
+      Service_Account: 'Super Tech LTDA',
+      Payment_Terms: 'Uppon Signature',
+      US_State: 'California'
     },
     {
       Name: `Corporate Accounting Offshore - Advisory`,
@@ -19,6 +22,9 @@ const serviceMock = [
         "Drummond Sociedade de Advogados",
       ],
       Unit_Price: 850,
+      Service_Account: 'Super Tech LTDA',
+      Payment_Terms: 'Uppon Signature',
+      US_State: 'California'
     },
     {
       Name: `Corporate Accounting Offshore - Planner`,
@@ -30,6 +36,9 @@ const serviceMock = [
         "Drummond CPA LLC",
       ],
       Unit_Price: 100,
+      Service_Account: 'Super Tech LTDA',
+      Payment_Terms: 'Uppon Signature',
+      US_State: 'California'
     },
     {
       Name: `Corporate Accounting Offshore - Starter`,
@@ -41,6 +50,9 @@ const serviceMock = [
         "Drummond CPA LLC",
       ],
       Unit_Price: 200,
+      Service_Account: 'Super Tech LTDA',
+      Payment_Terms: 'Uppon Signature',
+      US_State: 'California'
     },
     {
       Name: `Real Estate - Advisory Plus+`,
@@ -51,6 +63,9 @@ const serviceMock = [
         "Drummond CPA LLC",
       ],
       Unit_Price: 3300,
+      Service_Account: 'Super Tech LTDA',
+      Payment_Terms: 'Uppon Signature',
+      US_State: 'California'
     },
   ]
   export default serviceMock

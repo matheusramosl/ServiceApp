@@ -20,7 +20,10 @@ export default function Provider({ children }) {
     Amount: '',
     Name: ''
   })
-  
+  const [optionsPackage, setOptionsPackage] = useState([])
+  const [serviceStatePackage, setServiceStatePackage] = useState([])
+
+
   const value = {
     darkMode,
     setDarkMode,
@@ -31,7 +34,9 @@ export default function Provider({ children }) {
     serviceType, setServiceType,
     packageType, setpackageType,
     proposalName, setProposalName,
-    modalInfos, setModalInfos
+    modalInfos, setModalInfos,
+    optionsPackage, setOptionsPackage,
+    serviceStatePackage, setServiceStatePackage
   };
   return (
     <context.Provider value={ value }>
