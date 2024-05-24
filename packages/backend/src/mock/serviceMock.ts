@@ -1,5 +1,6 @@
 const serviceMock = [
     {
+      Name: `Corporate Accounting Offshore - Advisory Plus+`,
       Recurrence: "One off",
       Description: null,
       id: "4978288000131461335",
@@ -9,6 +10,7 @@ const serviceMock = [
       Unit_Price: 600,
     },
     {
+      Name: `Corporate Accounting Offshore - Advisory`,
       Recurrence: "Monthly",
       Description: null,
       id: "4978288000131115065",
@@ -19,6 +21,7 @@ const serviceMock = [
       Unit_Price: 850,
     },
     {
+      Name: `Corporate Accounting Offshore - Planner`,
       Recurrence: "Monthly",
       Description: "• Evaluation of client’s questions and demands; \n• People service consulting;\n• People Development;\n• People attraction;\n• People operations;",
       id: "4978288000130265065",
@@ -26,9 +29,10 @@ const serviceMock = [
         "Drummond Advisors LLC",
         "Drummond CPA LLC",
       ],
-      Unit_Price: null,
+      Unit_Price: 100,
     },
     {
+      Name: `Corporate Accounting Offshore - Starter`,
       Recurrence: "Monthly",
       Description: "• Evaluation of client’s questions and demands; \n• Presentation of report with answers related to client’s questions;",
       id: "4978288000130265013",
@@ -36,16 +40,17 @@ const serviceMock = [
         "Drummond Advisors LLC",
         "Drummond CPA LLC",
       ],
-      Unit_Price: null,
+      Unit_Price: 200,
     },
     {
+      Name: `Real Estate - Advisory Plus+`,
       Recurrence: "Monthly",
       Description: null,
       id: "4978288000130047202",
       Service_Provider1: [
         "Drummond CPA LLC",
       ],
-      Unit_Price: null,
+      Unit_Price: 3300,
     },
   ]
   export default serviceMock

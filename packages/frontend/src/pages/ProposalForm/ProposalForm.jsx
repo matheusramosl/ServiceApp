@@ -11,6 +11,7 @@ function ProposalForm() {
     signatoryEmails: [],
     Lead: [],
     Contact: [],
+    currency: 'USD'
   })
 
 
@@ -55,7 +56,7 @@ function ProposalForm() {
       setState({
         ...state,
         [target.name]: target.value,
-        signatoryEmails: [state[state.clientType].find((i) => target.value.includes(i.Last_Name)).Email || '']
+        signatoryEmails: state[state.clientType].find((i) => target.value.includes(i.Last_Name))?.Email ? [state[state.clientType].find((i) => target.value.includes(i.Last_Name)).Email] : []
       })
     } else {
       setState({
@@ -99,13 +100,13 @@ function ProposalForm() {
     {state.clientType && (state.clientType === 'Lead' ?       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Lead</label>
         <select name='client' onChange={(e) => addClient(e)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-          <option>Select Lead</option>
+          <option value=''>Select Lead</option>
           {state.Lead.map((i,index) => <option key={index}>{`${i.First_Name} ${i.Last_Name}`}</option>)}
         </select>
       </div> : <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Contact</label>
         <select name='client' onChange={(e) => addClient(e)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-          <option>Select Contact</option>
+          <option value=''>Select Contact</option>
           {state.Contact.map((i, index) => <option key={index}>{`${i.First_Name} ${i.Last_Name}`}</option>)}
 
         </select>
@@ -125,7 +126,7 @@ function ProposalForm() {
 
       <div className="mb-4">
       <label className="block text-sm font-medium text-gray-700">Currency</label>
-        <select name='currency' className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+        <select name='currency' value={state.currency} onChange={(e) => handleChange(e)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <option>USD</option>
           <option>BRL</option>
         </select>

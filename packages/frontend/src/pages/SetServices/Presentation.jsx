@@ -6,57 +6,27 @@ import context from '../../context/context'
 import ServicesComponent from './ServicesComponent'
 import PackagesComponent from './PackagesComponent'
 import ModalComponent from '../../components/ModalComponent'
+import { handleZohoRequest } from '../../requests/handleZohoRequests'
 
 
 
 
 export default function Presentation() {
-  const options = [
-    {
-        Name: `One-off • Billed on acceptance`,
-        Amount: 2500,
-        Type: 'service'
-    },
-    {
-        Name: `One-off • Billed on acceptance`,
-        Amount: 2500,
-        Type: 'service'
-    }
-]
-
-  const {setSelectedOptions, serviceType, setServiceType,selectOptions} = useContext(context)
+  const {setSelectedOptions, setServiceType,selectOptions} = useContext(context)
   const getTotal = () => {
     const allServices = selectOptions.filter((i) => i.Type === 'service').reduce((acc, curr) => curr.Amount + acc, 0)
     const allPackages = selectOptions.filter((i) => i.Type === 'package').reduce((acc, curr) => curr.Amount + acc, 0)
     return allPackages + allServices
 } 
 
-  // const verifyComponent = () => {
-  //   switch (serviceType) {
-  //     case 'all':
-  //       return (<div className='w-11/12'>
-  //         <ServicesComponent />
-  //         <PackagesComponent />
-  //       </div>);
-  //       case 'service': 
-  //         return (<div className='w-11/12'>
-  //         <ServicesComponent  />
-  //         </div>);
-  //       case 'package':
-  //         return (<div className='w-11/12'>
-  //         <PackagesComponent  />
-  //         </div>);
-  //       default:
-  //         return <ModalComponent />
-  //   }
-  // }
   const verifyComponent = () => {
     return (<div className='w-11/12'>
       <ServicesComponent />
       <PackagesComponent />
     </div>);
-
 }
+
+
 
   const resetButton = () => {
     setServiceType('')

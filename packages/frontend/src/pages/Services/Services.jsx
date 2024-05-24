@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import Navbar from '../../components/NavBar'
 import StepsBar from '../../components/StepsBar'
 import ServiceItem from './ServiceItem'
 import context from '../../context/context'
 import PackageItem from './PackageItem'
-import { handleZohoRequest } from '../../requests/handleZohoRequests'
 
 
 export default function Services() {
@@ -35,10 +34,7 @@ export default function Services() {
 
         </div>
     </div> 
-    
 
-    {/* 
-     */}
      <div className='flex justify-between mt-6'>
     <span className='flex ml-20 font-shadow text-drummond-primary'>Packages</span>
 </div>

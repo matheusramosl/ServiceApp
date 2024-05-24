@@ -9,17 +9,32 @@ export default function ServicesComponent() {
   // const {setServiceType} = useContext(context)
   const [services, setServices] = useState('')
   const [options, setOptions] = useState([
-    {
-        Name: `One-off • Billed on acceptance`,
-        Amount: 2500,
-        Type: 'service'
-    },
-    {
-        Name: `Annual • Billed on acceptance`,
-        Amount: 1300,
-        Type: 'service'
-    }
 ])
+
+const getAllServices = async () => {
+  const serviços = await handleZohoRequest('services')
+  console.log(serviços);
+  const servicesMapped = serviços.services.map((i) => ({
+    Name: i.Name || 'Name',
+    Amount: i.Unit_Price || 'Unit_Price',
+    Year: 2024,
+    Type: 'service',
+    Recurrence: i.Recurrence || 'Recurrence', 
+    Parent: i.Parent_Account || 'Parent_Account',
+    serviceAccount: i.Service_Account || 'Service_Account',
+    paymentTerms: i.Payment_Terms || 'Payment_Terms',
+    usState: i.US_State || 'US_State',
+    competenceYear: i.Competence_Year || 'Competence_Year',
+    executionYear: i.Execution_Year || '2024',
+    providers: i.Service_Provider1 || ['Drummond CPA LLC'],
+    quantity: 1
+  }))
+  setOptions(servicesMapped)
+  }
+
+  useEffect(() => {
+    getAllServices()
+  }, [])
   const handleChange = ({value}) => {
       setServices(value)
   }
@@ -28,26 +43,6 @@ export default function ServicesComponent() {
       setServices('');
   }
 
-  // const getServices = async () => {
-  //   const teste = await handleZohoRequest('services')
-  //   setOptions(teste.map((i) => {Name: i.}));
-  // }
-  // useEffect(() => {
-  //   getServices()
-  // },[])
-
-//   const options = [
-//     {
-//         Name: `One-off • Billed on acceptance`,
-//         Amount: 2500,
-//         Type: 'service'
-//     },
-//     {
-//         Name: `Annual • Billed on acceptance`,
-//         Amount: 1300,
-//         Type: 'service'
-//     }
-// ]
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex justify-between w-11/12 self-center'>
@@ -60,7 +55,7 @@ export default function ServicesComponent() {
       </div>
       <div className='flex items-center justify-center'>
         <div className=' bg-white shadow-lg w-11/12' >
-            {selectOptions.filter((i) => i.Type === 'service').length > 0 ? selectOptions.filter((i) => i.Type === 'service').map(({Name, Amount}) => <ServiceItem props={{Name, Amount }} />) : <p className='ml-10'>No Service Selected</p>}
+            {selectOptions.filter((i) => i.Type === 'service').length > 0 ? selectOptions.filter((i) => i.Type === 'service').map((i) => <ServiceItem props={i} />) : <p className='ml-10'>No Service Selected</p>}
            
         </div>
     </div> 
