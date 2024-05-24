@@ -24,8 +24,8 @@ const verifyNavigate = (type) => {
       <ul className="steps w-full">
         <li className="step step-primary">General</li>
         <li className={(pathname.includes('services') || pathname.includes('presentation')) ? "step step-primary" : "step"}>Services</li>
-        <li className={pathname.includes('presentation') ? "step step-primary" : "step"}>Presentation</li>
-        <li className="step">Send</li>
+        {/* <li className={pathname.includes('presentation') ? "step step-primary" : "step"}>Presentation</li>
+        <li className="step">Send</li> */}
       </ul>
       <div className="w-1/12">
         {/* {
