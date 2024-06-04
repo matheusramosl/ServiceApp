@@ -1,26 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import context from '../../context/context';
 import { useNavigate } from 'react-router-dom';
 import { handleZohoRequest } from '../../requests/handleZohoRequests';
 
 function ProposalForm() {
-  const [state,setState] = useState({
-    proposalName: '',
-    clientType: '',
-    signatory: '',
-    signatoryEmails: [],
-    Lead: [],
-    Contact: [],
-    currency: 'USD'
-  })
 
-
-
-
-  const {setProposalName} = useContext(context)
+  const {setProposalName,state,setState} = useContext(context)
+  const {setClientName} = useContext(context)
   let navigate = useNavigate();
   const submitBtn = () => {
     setProposalName(state.proposalName)
+    setClientName(state.clientName)
+    // console.log(state);
     navigate('/services')
   }
   const handleChange = async ({target}) => {
@@ -56,8 +47,11 @@ function ProposalForm() {
       setState({
         ...state,
         [target.name]: target.value,
-        signatoryEmails: state[state.clientType].find((i) => target.value.includes(i.Last_Name))?.Email ? [state[state.clientType].find((i) => target.value.includes(i.Last_Name)).Email] : []
+        signatoryEmails: state[state.clientType].find((search) => target.value.includes(search.Last_Name))?.Email ? [state[state.clientType].find((search) => target.value.includes(search.Last_Name)).Email] : [],
+        clientName: target.value,
+        clientId: state[state.clientType].find((search) => target.value.includes(search.Last_Name))?.Email ? state[state.clientType].find((search) => target.value.includes(search.Last_Name)).id : '',
       })
+
     } else {
       setState({
         ...state,
@@ -75,10 +69,10 @@ function ProposalForm() {
       })
     }
   }
-  const removeSigaory = (str) => {
+  const removeSigaory = (item) => {
     setState({
       ...state,
-      signatoryEmails: state.signatoryEmails.filter((i) => i !== str ),
+      signatoryEmails: state.signatoryEmails.filter((stateValue) => stateValue !== item ),
     })
   }
   return (
@@ -90,7 +84,7 @@ function ProposalForm() {
       
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Client Type</label>
-        <select onChange={(e) => handleChange(e)} name='clientType' className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+        <select onChange={(change) => handleChange(change)} name='clientType' className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <option name='' value=''>Select Client Type</option>
           <option name='lead'>Lead</option>
           <option name='contact' >Contact</option>
@@ -99,34 +93,36 @@ function ProposalForm() {
 
     {state.clientType && (state.clientType === 'Lead' ?       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Lead</label>
-        <select name='client' onChange={(e) => addClient(e)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+        <select name='client' onChange={(change) => addClient(change)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <option value=''>Select Lead</option>
-          {state.Lead.map((i,index) => <option key={index}>{`${i.First_Name} ${i.Last_Name}`}</option>)}
+          {state.Lead.map((lead,index) => <option key={index}>{`${lead.First_Name} ${lead.Last_Name}`}</option>)}
         </select>
       </div> : <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Contact</label>
-        <select name='client' onChange={(e) => addClient(e)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+        <select name='client' onChange={(change) => addClient(change)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <option value=''>Select Contact</option>
-          {state.Contact.map((i, index) => <option key={index}>{`${i.First_Name} ${i.Last_Name}`}</option>)}
+          {state.Contact.map((contact, index) => <option key={index} >{`${contact.First_Name} ${contact.Last_Name}`}</option>)}
 
         </select>
       </div>)}
 
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Signatory</label>
+        {state.signatoryEmails.map((stateValue,index) => <div key={index} className="mb-4 flex justify-between">
+        <span className="block text-sm font-medium text-gray-700">{stateValue}</span>
+        <button onClick={() => removeSigaory(stateValue)}>x</button>
+      </div>)}
         <div className="mb-4 flex justify-between">
-        <input type="text" id="signatory" name='signatory' placeholder="Signatory Email" value={state.signatory} onChange={(e) => handleChange(e) } className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"/>
+          
+        <input type="text" id="signatory" name='signatory' placeholder="Signatory Email" value={state.signatory} onChange={(change) => handleChange(change) } className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"/>
         <button onClick={() => addSigntory()} className='text-blue-700'>+</button>
       </div>
       </div>
-      {state.signatoryEmails.map((i,index) => <div key={index} className="mb-4 flex justify-between">
-        <span className="block text-sm font-medium text-gray-700">{i}</span>
-        <button onClick={() => removeSigaory(i)}>x</button>
-      </div>)}
+      
 
       <div className="mb-4">
       <label className="block text-sm font-medium text-gray-700">Currency</label>
-        <select name='currency' value={state.currency} onChange={(e) => handleChange(e)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+        <select name='currency' value={state.currency} onChange={(change) => handleChange(change)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <option>USD</option>
           <option>BRL</option>
         </select>

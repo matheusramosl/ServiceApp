@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react'
-import context from '../../../context/context'
+import React, { useContext } from 'react'
+import context from '../../../../context/context'
 
 export default function ServicePackageItem({props}) {
-    const {Name, paymentTerm, Description, packageName} = props
+    const {Name, Description, packageName} = props
     const {setServiceStatePackage, serviceStatePackage, selectOptions, setSelectedOptions} = useContext(context)
 
     const removeService = () => {
-        const newServicesObj = serviceStatePackage.filter((a) => a.Name !== Name)
-        const find = selectOptions.find((i) => i.Name === packageName)
-        const filtered = selectOptions.filter((i) => i.Name !== packageName)
+        const newServicesObj = serviceStatePackage.filter((state) => state.Name !== Name)
+        const find = selectOptions.find((finds) => finds.Name === packageName)
+        const filtered = selectOptions.filter((filters) => filters.Name !== packageName)
         setSelectedOptions([...filtered, {...find, services:newServicesObj}])
         setServiceStatePackage(newServicesObj);       
     }

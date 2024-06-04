@@ -7,7 +7,7 @@ import {
 import Welcome from './pages/welcome/Welcome';
 import Provider from "./context/provider";
 import './App.css'
-import Services from "./pages/Services/Services";
+import Services from "./pages/SetServices/Services/Services";
 import Presentation from "./pages/SetServices/Presentation";
 
 const router = createBrowserRouter([

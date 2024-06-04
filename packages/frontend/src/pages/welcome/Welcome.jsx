@@ -8,10 +8,10 @@ import { handleZohoRequest } from '../../requests/handleZohoRequests'
 export default function Welcome() {
 
   return (
-    <div className='flex flex-col gap-10'>
+    <div className='flex flex-col gap-10 bg-gray-100 w-screen h-screen'>
         <NavBar />
         <StepsBar />
-        <div className='flex justify-center items-center h-full w-full'>
+        <div className='flex justify-center items-center h-50px w-full '>
             <ProposalForm />
         </div>
     </div>

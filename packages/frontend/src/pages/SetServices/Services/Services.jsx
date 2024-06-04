@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
-import Navbar from '../../components/NavBar'
-import StepsBar from '../../components/StepsBar'
+import Navbar from '../../../components/NavBar'
+import StepsBar from '../../../components/StepsBar'
 import ServiceItem from './ServiceItem'
-import context from '../../context/context'
-import PackageItem from './PackageItem'
+import context from '../../../context/context'
+import PackageItem from '../Packages/PackageItem'
 
 
 export default function Services() {
     const {selectOptions} = useContext(context)
 
     const getTotal = () => {
-        const allServices = selectOptions.filter((i) => i.Type === 'service').reduce((acc, curr) => curr.Amount + acc, 0)
-        const allPackages = selectOptions.filter((i) => i.Type === 'package').reduce((acc, curr) => curr.Amount + acc, 0)
+        const allServices = selectOptions.filter((select) => select.Type === 'service').reduce((acc, curr) => curr.Amount + acc, 0)
+        const allPackages = selectOptions.filter((select) => select.Type === 'package').reduce((acc, curr) => curr.Amount + acc, 0)
         return allPackages + allServices
     } 
 
@@ -30,7 +30,7 @@ export default function Services() {
 </div>
 <div className='flex items-center justify-center'>
         <div className=' bg-white shadow-lg w-11/12'>
-            {selectOptions.filter((i) => i.Type === 'service').length > 0 ? selectOptions.filter((i) => i.Type === 'service').map(({Name, Amount}) => <ServiceItem props={{Name, Amount }} />) : <p className='ml-10'>No Service Selected</p>}
+            {selectOptions.filter((select) => select.Type === 'service').length > 0 ? selectOptions.filter((select) => select.Type === 'service').map(({Name, Amount}) => <ServiceItem props={{Name, Amount }} />) : <p className='ml-10'>No Service Selected</p>}
 
         </div>
     </div> 
@@ -40,7 +40,7 @@ export default function Services() {
 </div>
     <div className='flex items-center justify-center'>
         <div className=' bg-white shadow-lg w-11/12'>
-            {selectOptions.filter((i) => i.Type === 'package').length > 0 ? selectOptions.filter((i) => i.Type === 'package').map(({Name, Amount}) => <PackageItem props={{Name, Amount }} />) : <p className='ml-10'>No Package Selected</p>}
+            {selectOptions.filter((select) => select.Type === 'package').length > 0 ? selectOptions.filter((select) => select.Type === 'package').map(({Name, Amount}) => <PackageItem props={{Name, Amount }} />) : <p className='ml-10'>No Package Selected</p>}
 
         </div>
     </div>

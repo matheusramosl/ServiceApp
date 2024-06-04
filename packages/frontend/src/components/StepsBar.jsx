@@ -1,11 +1,35 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import {  useLocation, useNavigate } from 'react-router-dom';
 import context from '../context/context';
+import { handlePostZohoRequest } from '../requests/handleZohoRequests'
+
+
+
 export default function StepsBar() {
   let navigate = useNavigate();
   const {pathname} = useLocation()
-console.log(pathname);
-const {selectOptions} = useContext(context)
+  console.log(pathname);
+  const {selectOptions, state} = useContext(context)
+
+  const createProposal = async () => {
+  
+    console.log({selectOptions, state})
+
+    const payload = {
+      Name:state.proposalName,
+      Contact:[{
+      name:state.clientName,
+      id:state.clientId}],
+      Currency:state.currency,
+      Email:state.signatoryEmails,
+      Proposal_Services:[{
+        asas:selectOptions
+      }],
+    }
+    // const newProposal = await handlePostZohoRequest('create', selectOptions);
+    // console.log(newProposal)
+  }
+
 const verifyNavigate = (type) => {
   if(type === 'next') {
     return !pathname.includes('services') ? '/services' : '/presentation'
@@ -31,11 +55,11 @@ const verifyNavigate = (type) => {
         {/* {
           pathname.includes('services') &&
           <button className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-2 px-4 rounded" onClick={() => navigate(verifyNavigate('next'))}>Next</button>
-        }
-        {
-          (pathname.includes('presentation') && selectOptions.length > 0) &&
-          <button className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-2 px-4 rounded" onClick={() => console.log('send')}>Send</button>
         } */}
+        {
+          (pathname.includes('services') && selectOptions.length > 0) &&
+          <button className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-2 px-4 rounded" onClick={() => createProposal()}>Send</button>
+        }
       </div>
     </div>
   )

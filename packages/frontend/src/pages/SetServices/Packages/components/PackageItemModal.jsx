@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import ServicePackageItem from './components/ServicePackageItem';
-import context from '../../context/context';
+import ServicePackageItem from '../../Services/components/ServicePackageItem';
+import PackageDescriptionItem from './PackageDescriptionItem';
+import context from '../../../../context/context';
 
 function PackageItemModal({props}) {
   const {Name, Amount} = props
   const {serviceStatePackage} = useContext(context)
   return (
-    <div className="bg-white shadow-lg rounded-lg p-8 w-3/6  flex flex-col self-center  min-h-min text-base-content z-50">
+    <div className="bg-white shadow-lg rounded-lg p-8 w-2/6  flex flex-col self-center  min-h-min text-base-content z-50">
       <div className="flex justify-between items-center mb-6 ">
         <div className="text-gray-800 font-extrabold">{Name}</div>
         
@@ -15,8 +16,9 @@ function PackageItemModal({props}) {
         <div className="col-span-1 mb-6">
             <span>{props.description}</span>
         </div>
-       <ul className='w-[300px]'>Services</ul>
-        {serviceStatePackage.map((i) =>  <ServicePackageItem props={{...i, packageName: Name}} /> )}
+       {/* <ul className='w-[300px]'>Services</ul> */}
+        {/* {serviceStatePackage.map((state) =>  <ServicePackageItem props={{...state, packageName: Name}} /> )} */}
+        <PackageDescriptionItem props={{...props, packageName: Name}} />
         
         <div className='flex justify-between flex-wrap'>
 
@@ -38,7 +40,7 @@ function PackageItemModal({props}) {
             <span className="label-text">Year</span>
           </div>
           <select className="select select-bordered">
-            {props.Year.map((i) => <option>{i}</option>)}
+            {props.Year.map((year) => <option>{year}</option>)}
           </select>
           </label>
         </div>
