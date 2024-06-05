@@ -11,7 +11,6 @@ function ProposalForm() {
   const submitBtn = () => {
     setProposalName(state.proposalName)
     setClientName(state.clientName)
-    // console.log(state);
     navigate('/services')
   }
   const handleChange = async ({target}) => {
