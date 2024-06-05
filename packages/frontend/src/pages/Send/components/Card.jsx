@@ -5,9 +5,9 @@ function Card() {
     const {clientName} = useContext(context);
     const {proposalName} = useContext(context);
     const {signatoryEmails} = useContext(context);
+    const {state} = useContext(context);
     return (
     <div className="carrd flex justify-center">
-        <button onClick={()=> console.log(signatoryEmails)}>aaaaaaaaaaaa</button>
         <div className="card size-1/2 flex justify-between items-center mb-4 py-2 bg-white shadow-lg" >
             <div className="p-4 border-b-2 border-gray-200">
                 <h1>Card</h1>
@@ -19,7 +19,7 @@ function Card() {
                 Sending: "{proposalName}" to {clientName}
                 </span>
                 <span>
-                    Signatory: {clientName} - {signatoryEmails}
+                    Signatory: {clientName} - {state.signatoryEmails[0]}
                 </span>
             </div>
         </div>
