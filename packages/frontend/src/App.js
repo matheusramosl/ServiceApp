@@ -9,6 +9,7 @@ import Provider from "./context/provider";
 import './App.css'
 import Services from "./pages/SetServices/Services/Services";
 import Presentation from "./pages/SetServices/Presentation";
+import Send from "./pages/Send/Send";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
     path: "presentation",
     element: <Services />,
   },
+  {
+    path: "send",
+    element: <Send />,
+  }
 ]);
 
 
