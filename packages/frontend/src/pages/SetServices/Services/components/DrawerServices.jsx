@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState} from 'react'
 import ServiceItemModal from './ServiceItemModal'
 import PackageItemModal from '../../Packages/components/PackageItemModal'
 import context from '../../../../context/context'
@@ -8,10 +8,18 @@ export default function DrawerServices({props}) {
     const {modalInfos, setModalInfos, setServiceStatePackage} = useContext(context)
     const {type} = modalInfos
 
+    const [isModalOpen, setModalOpen] = useState(false);
+
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
     const handleClick = () => {
       console.log('clicado')
       setServiceStatePackage(props.services)
       setModalInfos(props)
+      setModalOpen(true);
     }
   return (
     <div className="drawer drawer-end ">
@@ -29,12 +37,14 @@ export default function DrawerServices({props}) {
         </div>
     </label>
 </div>
+
   <div className="drawer-side z-50">
     <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-    {<ServiceItemModal props={props}/>}
+    {<ServiceItemModal props={props} closeModal={closeModal}/>}
     {/* {type === 'package' && <PackageItemModal props={{...modalInfos}}/>} */}
 
   </div>
+
 </div>
   )
 }

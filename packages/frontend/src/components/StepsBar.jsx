@@ -12,22 +12,43 @@ export default function StepsBar() {
   const {selectOptions, state} = useContext(context)
 
   const createProposal = async () => {
-  
+    const serviceArray = [];
+
     console.log({selectOptions, state})
+    selectOptions.forEach((item) => {
+      const serviceObject = {
+        Service: item.id,
+        Recurrence1: item.Recurrence,
+        Effective_Year: item.competenceYear,
+        Execution_Year: item.executionYear,
+        // Packages: item.packege, // Assuming you meant 'package' here
+        Payment_Terms: item.paymentTerms,
+        Unit_Price: item.Amount,
+        Quantity: item.quantity,
+        US_State: item.usState,
+        Service_Provider: item.providers,
+        Fee_Details: "",
+        Description: item.description,
+        // Notes2: Note,
+        // Plan_Service: "Service Order",
+      };
+
+      serviceArray.push(serviceObject);
+    });
+    
 
     const payload = {
       Name:state.proposalName,
-      Contact:[{
-      name:state.clientName,
-      id:state.clientId}],
+      Contact:state.clientId,
       Currency:state.currency,
       Email:state.signatoryEmails,
-      Proposal_Services:[{
-        asas:selectOptions
-      }],
+      Proposal_Services:{
+        serviceArray
+      },
     }
-    // const newProposal = await handlePostZohoRequest('create', selectOptions);
-    // console.log(newProposal)
+    console.log(payload)
+    const newProposal = await handlePostZohoRequest('create', payload);
+    console.log(newProposal)
   }
 
 const verifyNavigate = (type) => {
