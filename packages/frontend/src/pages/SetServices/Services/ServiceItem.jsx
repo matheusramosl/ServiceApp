@@ -16,7 +16,6 @@ function ServiceItem({props}) {
   const {Name, Amount, Recurrence, Parent,serviceAccount} = props
   const { selectOptions,setSelectedOptions,state} = useContext(context)
   const [isVisible, setIsVisible] = useState(false);
-  // console.log(selectOptions);
   const recValues = ['One Off','Annual','Monthly','Biannual', 'Quarterly']
   const year= [2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
   const [optionsAcc, setOptionsAcc] = useState({accounts:[{}]})
@@ -63,41 +62,24 @@ function ServiceItem({props}) {
        onMouseLeave={() => setIsVisible(false)}
     >
       <div className="flex justify-end mb-4 pr-4">
-           
-        {/* <div className="text-gray-800 font-semibold ">{Name} </div> */}
-        {/* <div className="text-gray-800 font-semibold flex pr-8"> */}
         <div className='pl-6 pr-4"'>
         {isVisible && (
         <DropdownMenu props={props} />
         )}
         </div>
-        {/* </div> */}
       </div>
-        {/* <div className="grid grid-cols-8 gap-4 items-center  py-2 border ">
-          <label htmlFor="service" className="col-span-3 px-1">Servce Account </label>
-          <label htmlFor="billing" className="col-span-1">Recurrence</label>
-          <label className="col-span-1">Competence Year</label>
-          <label htmlFor="quantity" className="col-span-1 text-center">Quantity</label>
-        </div> */}
       <div className="grid grid-cols-8 gap-4 items-center  ">
         <div className="col-span-2">
         <div className="text-gray-800 font-semibold ">{Name} </div>
         </div>
 
-      <div className="grid grid-cols-8 gap-4 items-center py-2 border">
-        <div className="col-span-3">
+      
+        <div className="col-span-2">
           <ServicesSearchableSelect
            props = {select}
-          />
-          {/* <select id="service" className="rounded form-seleict block w-full mt-1 border-gray-300 shadow-sm" >
+           />
+           </div>
 
-            {optionsAcc.accounts.map((account, index) => (
-                <option key={index} value={account.Account_Name?.name}>
-                  {account.Account_Name?.name}
-                </option>
-              ))}
-            </select> */}
-        </div>
         <div className="col-span-1">
           <select id="rec" name='Recurrence' defaultValue={selectOptions[props.index].Recurrence} className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm" onChange={handleOptionChange}>
           {recValues.map((recurrence) => (

@@ -17,18 +17,18 @@ export default class ProposalController {
 
   public async getServices(_req: Request, res: Response) {
     const services = await this._service.findAllServices();
-
+   
     res.status(200).json({ services });
   }
   public async getAccounts(_req: Request, res: Response) {
     const accounts = await this._service.findAllAccounts();
-
+    console.log(accounts);
+    
     res.status(200).json({ accounts });
   }
 
   public async getLeads(_req: Request, res: Response) {
     const leads = await this._service.findAllLeads();
-
     res.status(200).json({ leads });
   }
 

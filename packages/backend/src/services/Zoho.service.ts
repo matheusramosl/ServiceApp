@@ -10,17 +10,17 @@ export default class ZohoService {
   async findAllServices() {
     console.log(`Looking for all CRM Account`);
     try {
+      const token = await this.getOauthToken('crm')
       const result = await axios({
         method: "get",
-        url: `https://www.zohoapis.com/crm/v3/Products?fields=Recurrence,Payment_Terms,Unit_Price,Service_Provider1,Description,Notes1&per_page=5`,
+        url: `https://www.zohoapis.com/crm/v3/Products?fields=Recurrence,Payment_Terms,Unit_Price,Service_Provider1,Description,Notes1,Product_Name`,
         headers: {
-          Authorization: `Zoho-oauthtoken `,
+          Authorization: `Zoho-oauthtoken ${token}`,
           "Content-Type": "application/json",
         },
       });
-      return serviceMock;
+      return result.data.data;
     } catch (err: any) {
-      return serviceMock;
       console.error(err);
     }
   }
@@ -28,18 +28,17 @@ export default class ZohoService {
   async findAllPackages() {
     console.log(`Looking for all CRM Account`);
     try {
+      const token = await this.getOauthToken('crm')
       const result = await axios({
         method: "get",
         url: `https://www.zohoapis.com/crm/v3/Packages`,
         headers: {
-          Authorization: `Zoho-oauthtoken `,
+          Authorization: `Zoho-oauthtoken ${token}`,
           "Content-Type": "application/json",
         },
       });
-      return packagesMock;
+      return result.data.data;
     } catch (err: any) {
-      return packagesMock;
-
       console.error(err);
     }
   }
@@ -47,17 +46,17 @@ export default class ZohoService {
   async findAllLeads() {
     console.log(`Looking for all CRM Account`);
     try {
+      const token = await this.getOauthToken('crm')
       const result = await axios({
         method: "get",
-        url: `https://www.zohoapis.com/crm/v3/Leads?fields=Last_Name,Email&per_page=5`,
+        url: `https://www.zohoapis.com/crm/v3/Leads?fields=First_Name,Last_Name,Email`,
         headers: {
-          Authorization: `Zoho-oauthtoken `,
+          Authorization: `Zoho-oauthtoken ${token}`,
           "Content-Type": "application/json",
         },
       });
-      return leadMock;
+      return result.data.data;
     } catch (err: any) {
-      return leadMock;
       console.error(err);
     }
   }
@@ -66,16 +65,16 @@ export default class ZohoService {
     console.log(`Looking for all CRM Account`);
     try {
       const parent = encodeURIComponent("Parent Account");
-
+      const token = await this.getOauthToken('crm')
       const result = await axios({
         method: "get",
         url: `https://www.zohoapis.com/crm/v3/Accounts/search?criteria=(Account_Type:equals:${parent})`,
         headers: {
-          Authorization: `Zoho-oauthtoken`,
+          Authorization: `Zoho-oauthtoken ${token}`,
           "Content-Type": "application/json",
         },
       });
-      return result;
+      return result.data.data;
     } catch (err: any) {
       console.error(err);
     }
@@ -84,17 +83,17 @@ export default class ZohoService {
   async findAllAccounts() {
     console.log(`Looking for all CRM Account`);
     try {
+      const token = await this.getOauthToken('crm')
       const result = await axios({
         method: "get",
         url: `https://www.zohoapis.com/crm/v3/Accounts`,
         headers: {
-          Authorization: `Zoho-oauthtoken `,
+          Authorization: `Zoho-oauthtoken ${token}`,
           "Content-Type": "application/json",
         },
       });
-      return accountMock;
+      return result.data.data;
     } catch (err: any) {
-      return accountMock;
 
       console.error(err);
     }
@@ -103,17 +102,17 @@ export default class ZohoService {
   async findAllContacts() {
     console.log(`Looking for all CRM Account`);
     try {
+      const token = await this.getOauthToken('crm')
       const result = await axios({
         method: "get",
-        url: `https://www.zohoapis.com/crm/v3/Contacts?fields=Last_Name,First_Name,Account_Name,Email&per_page=5`,
+        url: `https://www.zohoapis.com/crm/v3/Contacts?fields=Last_Name,First_Name,Account_Name,Email`,
         headers: {
-          Authorization: `Zoho-oauthtoken`,
+          Authorization: `Zoho-oauthtoken ${token}`,
           "Content-Type": "application/json",
         },
       });
-      return contactMock;
+      return result.data.data;
     } catch (err: any) {
-      return contactMock;
       console.error(err);
     }
   }
@@ -121,17 +120,17 @@ export default class ZohoService {
   async createProposal(data: any) {
     console.log(`Createing proposal CRM`);
     try {
+      const token = await this.getOauthToken('crm')
       const result = await axios({
         method: "get",
-        url: `https://www.zohoapis.com/crm/v3/Contacts?fields=Last_Name,First_Name,Account_Name,Email&per_page=5`,
+        url: `https://www.zohoapis.com/crm/v3/Contacts?fields=Last_Name,First_Name,Account_Name,Email`,
         headers: {
-          Authorization: `Zoho-oauthtoken`,
+          Authorization: `Zoho-oauthtoken ${token}`,
           "Content-Type": "application/json",
         },
       });
-      return createMock;
+      return result.data.data;
     } catch (err: any) {
-      return createMock;
       console.error(err);
     }
   }

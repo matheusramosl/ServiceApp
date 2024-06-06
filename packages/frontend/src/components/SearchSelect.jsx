@@ -20,17 +20,6 @@ const handleUserSelect = (selectedService) => {
   console.log('click botão')
   console.log(selectOptions)
 };
-
-// [
-//     { value: 'chocolate', label: 'Chocolate' },
-//     { value: 'strawberry', label: 'Strawberry' },
-//     { value: 'vanilla', label: 'Vanilla' }
-//   ]
-//   {recValues.map((recurrence) => (
-//     <option key={recurrence} value={recurrence}>
-//       { selectOptions[props.index].Recurrence}
-//     </option>
-//   ))}
   const filterColors = (inputValue) => {
     return option.filter((values) =>
       values.label.toLowerCase().includes(inputValue.toLowerCase())
