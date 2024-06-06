@@ -2,26 +2,24 @@ import React, { useContext, useState } from 'react'
 import {  useLocation, useNavigate } from 'react-router-dom';
 import context from '../context/context';
 import { handlePostZohoRequest } from '../requests/handleZohoRequests'
+import axios from 'axios';
 
 
 
 export default function StepsBar() {
   let navigate = useNavigate();
   const {pathname} = useLocation()
-  console.log(pathname);
-  const {selectOptions, state} = useContext(context)
+  const {selectOptions, state, clientRequestType} = useContext(context)
+  const [sendProposal, setSendProposal] = useState(true)
 
   const createProposal = async () => {
     const serviceArray = [];
-
-    console.log({selectOptions, state})
     selectOptions.forEach((item) => {
       const serviceObject = {
         Service: item.id,
         Recurrence1: item.Recurrence,
         Effective_Year: item.competenceYear,
         Execution_Year: item.executionYear,
-        // Packages: item.packege, // Assuming you meant 'package' here
         Payment_Terms: item.paymentTerms,
         Unit_Price: item.Amount,
         Quantity: item.quantity,
@@ -29,26 +27,22 @@ export default function StepsBar() {
         Service_Provider: item.providers,
         Fee_Details: "",
         Description: item.description,
-        // Notes2: Note,
-        // Plan_Service: "Service Order",
       };
 
       serviceArray.push(serviceObject);
     });
     
-
-    const payload = {
-      Name:state.proposalName,
-      Contact:state.clientId,
-      Currency:state.currency,
-      Email:state.signatoryEmails,
-      Proposal_Services:{
-        serviceArray
-      },
-    }
-    console.log(payload)
-    const newProposal = await handlePostZohoRequest('create', payload);
-    console.log(newProposal)
+    const payload =  {
+      "email": state.signatoryEmails[0],
+      "servicesID": serviceArray.map((i) => i.Service),
+      "userType": state.clientType
+  }
+  try {
+    await axios.post('http://localhost:3001/proposal/createByEmail', payload)
+    setSendProposal(false)
+  } catch (error) {
+    console.error(error);
+  }
   }
 
 const verifyNavigate = (type) => {
@@ -79,7 +73,7 @@ const verifyNavigate = (type) => {
           }
         {
           (pathname.includes('send') && selectOptions.length > 0) &&
-          <button className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-2 px-4 rounded" onClick={() => createProposal()}>Send</button>
+          (sendProposal && <button className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-2 px-4 rounded" onClick={() => createProposal()}>Send</button>)
         }
       </div>
     </div>

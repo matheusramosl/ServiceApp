@@ -13,15 +13,9 @@ export default function ServicesComponent() {
 ])
 
 const getAllServices = async () => {
-  const serviços = [{
-    Product_Name:'Name',
-    id:'4336546456'
-  }
-  ]
-   const serviçoss = await handleZohoRequest('services')
-  console.log(serviçoss)
-  // console.log(serviços);
-  const servicesMapped = serviços.map((service) => ({
+  
+   const servicos = await handleZohoRequest('services')
+  const servicesMapped = servicos.map((service) => ({
     Name: service.Product_Name || 'Name',
     id: service.id || '',
     Amount: service.Unit_Price || '0',
@@ -55,12 +49,6 @@ const getAllServices = async () => {
   return (
     <div className='flex flex-col gap-6 '>
       <div className='flex justify-between w-11/12 self-center '>
-    {/* <select className='w-1/4 rounded border border-gray-300 transition-colors hover:scale-105 hover:bg-gray-100 ' value={services} onChange={(change) => handleChange(change.target) } >
-      <option value={''}>Select Service</option>
-    {options.map((option) => <option value={option.Name} >{option.Name}</option>)}
-    </select>
-       */}
-     
       </div>
       <div className='flex items-center justify-center'>
         <div className=' bg-white shadow-lg w-11/12 p-4 rounded-lg' >
@@ -76,8 +64,6 @@ const getAllServices = async () => {
             <div className='flex justify-center md:flex'>
        <AddServiceBtn />
             </div>
-            {/* <button className={`bg-white hover:bg-gray-100 text-gray-800 font-semibold border border-gray-400 rounded shadow px-6 ${services === '' ? 'cursor-not-allowed' : ''}`} disabled={services === ''} onClick={() => handleClick()}>+ Add service</button> */}
-            
         </div>
     </div> 
     </div>

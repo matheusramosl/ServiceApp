@@ -7,7 +7,7 @@ import { handleZohoRequest } from '../../requests/handleZohoRequests';
 function ProposalForm() {
 
   const {setProposalName,state,setState} = useContext(context)
-  const {setClientName} = useContext(context)
+  const {setClientName, setClientRequestType} = useContext(context)
   let navigate = useNavigate();
   const submitBtn = () => {
     setProposalName(state.proposalName)
@@ -17,11 +17,13 @@ function ProposalForm() {
   const handleChange = async ({target}) => {
     let result = []
     if(target.value === 'Contact'){
+      setClientRequestType('Contact')
       const contacts = await handleZohoRequest('contacts')
       result = contacts.contacts
 
     }
     if(target.value === "Lead"){
+      setClientRequestType('Lead')
       const leads = await handleZohoRequest('leads')
       result = leads.leads
 
