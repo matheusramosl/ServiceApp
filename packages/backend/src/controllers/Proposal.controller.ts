@@ -54,4 +54,13 @@ export default class ProposalController {
 
     res.status(200).json({ packages });
   }
+  public async createProposalWithEmail(req: Request, res: Response) {
+    const proposal = await this._service.createNewProposalWithEmail(req.body)
+    res.status(200).json({proposal})
+  }
+  public async getToken(req: Request, res: Response) {
+    const token = await this._service.getToken()
+    
+    res.status(200).json(token)
+  }
 }
