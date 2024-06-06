@@ -135,4 +135,15 @@ export default class ZohoService {
       console.error(err);
     }
   }
+  async getOauthToken(service: string) {
+   
+    const result = await axios({
+      method: "get",
+      url: ` https://us-central1-drummond-tech-apis.cloudfunctions.net/getAccessToken/${service}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return result.data
+  }
 }
