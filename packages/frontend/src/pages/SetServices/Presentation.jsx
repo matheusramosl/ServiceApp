@@ -35,7 +35,7 @@ export default function Presentation() {
           return (<div className='w-11/12'>
           <ServicesComponent  />
           <div className='w-11/12 flex justify-start p-4 ps-14'>
-          <PackageBtn />
+          {/* <PackageBtn /> */}
           </div>
           </div>);
         case 'package':
@@ -70,12 +70,12 @@ export default function Presentation() {
               <p className="text-center text-sm">Search and select services from your Service library. If you don’t see the one you want, you can create a new one.</p>
               </div>
 
-              <div className='w-12/12 flex justify-center align-items-center py-6'>
+              <div className='w-12/12 flex justify-center align-items-center py-6 pl-10'>
                 <div className='px-8'>
                 <ServiceBtn /> 
                 </div>
                 <div className='px-8'>
-                <PackageBtn />
+                {/* <PackageBtn /> */}
                 </div>
               </div>
 

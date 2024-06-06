@@ -1,5 +1,18 @@
 import axios from 'axios'
 
+// export const handleZohoRequest = async (method) => {
+//   console.log('fazendo req')
+//     const result = await axios({
+//         method: 'get',
+//         url: `https://6654-200-169-156-219.ngrok-free.app/drummondportal-homolog/us-central1/workflowRoute/updateAccount/crm`,
+//         // headers: {
+//         //   'Content-Type': 'application/json',
+//         // },
+//       });
+//       console.log("result")
+//       console.log(result)
+//       return result.data
+// }
 export const handleZohoRequest = async (method) => {
     const result = await axios({
         method: 'get',
@@ -14,11 +27,11 @@ export const handleZohoRequest = async (method) => {
 export const handlePostZohoRequest = async (method, data) => {
     const result = await axios({
         method: 'post',
-        url: `https://a364-200-169-156-219.ngrok-free.app/zoho/createProposal`,
+        url: `https://6654-200-169-156-219.ngrok-free.app/drummondportal-homolog/us-central1/workflowRoute/updateAccount/crm`,
         data: data,
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      return result.data
+      return result
 }

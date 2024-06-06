@@ -2,11 +2,12 @@ import React, { useContext,useState } from 'react'
 import context from '../../../../context/context'
 import ServiceDescriptionItem from './ServiceDescriptionItem';
 
-function ServiceItemModal({props}) {
+function ServiceItemModal({props, closeModal}) {
   
   console.log(props)
   const [modalOptions, setModalOptions] = useState({
     Recurrence: props.props.Recurrence,
+    quantity: props.props.quantity,
     paymentTerms: props.props.paymentTerms,
     usState: props.props.usState || '', 
     competenceYear: props.props.competenceYear || 2024, 
@@ -16,7 +17,7 @@ function ServiceItemModal({props}) {
     Type:'service',
   });
 
-  const { selectOptions, setSelectedOptions} = useContext(context)
+  const { selectOptions, setSelectedOptions, state} = useContext(context)
   const {Name, Amount ,Recurrence, paymentTerms,index} = props.props
   const recurrenceValues = ['One Off','Annual','Monthly','Biannual','Quarterly']
   const year= [2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
@@ -98,6 +99,14 @@ function ServiceItemModal({props}) {
   ]
   console.log(selectOptions)
 
+
+  const [isModalOpen, setModalOpen] = useState();
+
+
+  const closesModal = () => {
+    setModalOpen(false);
+  };
+
   const handleSave = () => {
 
     const updatedOptions = [...selectOptions];
@@ -111,6 +120,9 @@ function ServiceItemModal({props}) {
 
     console.log('new');
     console.log(selectOptions);
+
+    closesModal()
+    
   };
 
   const handleOptionChange = (event) => {
@@ -122,12 +134,12 @@ function ServiceItemModal({props}) {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-8 w-5/12 min-h-min flex flex-col self-center  text-base-content z-50">
-      <div className="flex justify-between items-center mb-6 ">
+    <div className="bg-white shadow-lg rounded-lg p-8 w-5/12 min-h-min flex flex-col self-center md:flex text-base-content z-50">
+      <div className="flex justify-between items-center mb-6 md:shrink-0">
         <div className="text-gray-800 font-semibold">{Name}</div>
         <div className=''>
 
-        <button className={`bg-red-500 hover:bg-red-400 text-white font-semibold border border-gray-400 rounded shadow px-1`}>x</button>
+        <button onClick={closeModal} className={`bg-red-500 md:h-full md:w-48 hover:bg-red-400 text-white font-semibold border border-gray-400 rounded shadow px-1`}>x</button>
         </div>
       </div>
 
@@ -136,21 +148,21 @@ function ServiceItemModal({props}) {
         <div className="col-span-11 mb-2 w-1/2">
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">Service Account</span>
+            <span className="label-text">Quantity</span>
           </div>
-          <select  name='serviceAccount' className="select select-bordered" onChange={handleOptionChange}>
-            <option selected>{""}</option>
-          </select>
+          <label className="input input-bordered flex items-center">
+          <input type="number" name='quantity' defaultValue={selectOptions[index].quantity} className="rounded form-input mt-1 block w-full border-gray-300 shadow-sm text-center" onChange={handleOptionChange}/>
+            </label>
           </label>
         </div>
 
         <div className="col-span-1 mb-2 w-1/2">
 
         <label className="form-control w-full max-w-xs">
-          <div className="label">
+          <div className="label ">
             <span className="label-text">Recurrence</span>
           </div>
-          <select name='Recurrence' defaultValue={Recurrence} className="select select-bordered" onChange={handleOptionChange}>
+          <select name='Recurrence' defaultValue={Recurrence} className="select select-bordered " onChange={handleOptionChange}>
           {recurrenceValues.map((recurrence) => (
             <option key={recurrence} value={recurrence}>
               {recurrence}
@@ -244,8 +256,8 @@ function ServiceItemModal({props}) {
           <div className="label">
             <span className="label-text">Amount</span>
           </div>
-          <label className="input input-bordered flex items-center ">
-            $
+          <label className="input input-bordered flex items-center">
+          {state.currency === 'BRL'? 'R$': '$' }
             <input type="text" name='Amount' className="rounded form-input mt-1 block w-full border-gray-300 shadow-sm text-center" placeholder="Amount" defaultValue={Amount} onChange={handleOptionChange}/>
           </label>
           </label>
