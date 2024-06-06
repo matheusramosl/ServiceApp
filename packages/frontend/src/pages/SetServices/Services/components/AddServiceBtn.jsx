@@ -28,7 +28,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import Context from '../../../../context/context';
 import { handleZohoRequest } from '../../../../requests/handleZohoRequests'
 
-const ServiceBtn = () => {
+const AddServiceBtn = () => {
     const { selectOptions, setSelectedOptions, setServiceType } = useContext(Context);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [options, setOptions] = useState([]);
@@ -91,10 +91,10 @@ const ServiceBtn = () => {
         <div className="">
       
             <button
-                className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-1 px-4 rounded md:w-32 lg:w-32 "
+                className="bg-white hover:bg-gray-100 text-gray-800 font-semibold border border-gray-400 rounded shadow px-6 "
                 onClick={openModal}
             >
-              Service
+                + Add Service
             </button>
             
             {isModalOpen && (
@@ -129,4 +129,4 @@ const ServiceBtn = () => {
     );
 };
 
-export default ServiceBtn;
+export default AddServiceBtn;
