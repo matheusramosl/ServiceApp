@@ -3,6 +3,7 @@ import DrawerServices from './components/DrawerServices'
 import DropdownMenu from '../../../components/MoreComponent'
 import context from '../../../context/context'
 import { handleZohoRequest } from '../../../requests/handleZohoRequests'
+import ServicesSearchableSelect from './components/ServicesSearchableSelect'
 
 function ServiceItem({props}) {
 
@@ -19,6 +20,7 @@ function ServiceItem({props}) {
   const recValues = ['One Off','Annual','Monthly','Biannual', 'Quarterly']
   const year= [2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
   const [optionsAcc, setOptionsAcc] = useState({accounts:[{}]})
+  
 
   useEffect(() => {
     const fetchAccounts = async () => {
@@ -53,7 +55,8 @@ function ServiceItem({props}) {
 
   };
  
-
+  const select = optionsAcc.accounts.map((account, index) => ({value:account.Account_Name?.name, label: account.Account_Name?.name}))
+  
   return (
     <div className="bg-white p-4 border shadow m-3"
        onMouseEnter={() => setIsVisible(true)}
@@ -80,15 +83,20 @@ function ServiceItem({props}) {
         <div className="col-span-2">
         <div className="text-gray-800 font-semibold ">{Name} </div>
         </div>
-        <div className="col-span-2">
-          <select id="serviceAcc" name='serviceAccount' className="rounded form-seleict block w-full mt-1 border-gray-300 shadow-sm" >
 
-          {optionsAcc.accounts.map((account, index) => (
-              <option key={index} value={account.Account_Name?.name}>
-                {account.Account_Name?.name || selectOptions[props.index].serviceAccount[0]}
-              </option>
-            ))}
-          </select>
+      <div className="grid grid-cols-8 gap-4 items-center py-2 border">
+        <div className="col-span-3">
+          <ServicesSearchableSelect
+           props = {select}
+          />
+          {/* <select id="service" className="rounded form-seleict block w-full mt-1 border-gray-300 shadow-sm" >
+
+            {optionsAcc.accounts.map((account, index) => (
+                <option key={index} value={account.Account_Name?.name}>
+                  {account.Account_Name?.name}
+                </option>
+              ))}
+            </select> */}
         </div>
         <div className="col-span-1">
           <select id="rec" name='Recurrence' defaultValue={selectOptions[props.index].Recurrence} className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm" onChange={handleOptionChange}>

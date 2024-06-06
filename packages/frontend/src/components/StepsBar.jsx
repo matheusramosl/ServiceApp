@@ -53,7 +53,7 @@ export default function StepsBar() {
 
 const verifyNavigate = (type) => {
   if(type === 'next') {
-    return !pathname.includes('services') ? '/services' : '/presentation'
+    return !pathname.includes('services') ? '/services' : '/send'
   } else {
     return pathname.includes('services') ? '/' : '/services'
   }
@@ -68,17 +68,17 @@ const verifyNavigate = (type) => {
       </div>
       <ul className="steps w-full">
         <li className="step step-primary">General</li>
-        <li className={(pathname.includes('services') || pathname.includes('presentation')) ? "step step-primary" : "step"}>Services</li>
-        {/* <li className={pathname.includes('presentation') ? "step step-primary" : "step"}>Presentation</li>
-        <li className="step">Send</li> */}
+        <li className={(pathname.includes('services') || pathname.includes('send')) ? "step step-primary" : "step"}>Services</li>
+        <li className={pathname.includes('send') ? "step step-primary" : "step"}>Send</li>
+        {/* <li className="step">Send</li> */}
       </ul>
       <div className="w-1/12">
-        {/* {
-          pathname.includes('services') &&
-          <button className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-2 px-4 rounded" onClick={() => navigate(verifyNavigate('next'))}>Next</button>
-        } */}
+          {
+            pathname.includes('services') &&
+            <button className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-2 px-4 rounded" onClick={() => navigate(verifyNavigate('next'))}>Next</button>
+          }
         {
-          (pathname.includes('services') && selectOptions.length > 0) &&
+          (pathname.includes('send') && selectOptions.length > 0) &&
           <button className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-2 px-4 rounded" onClick={() => createProposal()}>Send</button>
         }
       </div>

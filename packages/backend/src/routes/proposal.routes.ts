@@ -28,5 +28,11 @@ proposalRoute.get("/packages", (req, res) =>
 proposalRoute.post("/create", (req, res) =>
   proposalController.createProposal(req, res)
 );
+proposalRoute.post("/createByEmail", (req, res) =>
+  proposalController.createProposalWithEmail(req, res)
+);
+proposalRoute.get("/getToken", (req, res) =>
+  proposalController.getToken(req, res)
+);
 
 export default proposalRoute;
