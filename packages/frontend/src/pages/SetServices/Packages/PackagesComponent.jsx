@@ -9,7 +9,6 @@ export default function PackagesComponent() {
 
   const getAllServices = async () => {
     const packages = await handleZohoRequest('packages')
-    console.log(packages);
     const packagesMapped = packages.packages.map((itemPackage) => ({
       Name: itemPackage.Packege_Name || 'Package_Name',
       Amount: itemPackage.Plan_Value || 0,

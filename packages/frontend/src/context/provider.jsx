@@ -5,6 +5,7 @@ export default function Provider({ children }) {
   const [darkMode, setDarkMode] = useState(true);
   const [proposalName, setProposalName] = useState('Untitled Proposal')
   const [clientName, setClientName] = useState('...')
+  const [clientRequestType, setClientRequestType] = useState('')
   const [state,setState] = useState({
     proposalName: '',
     clientName:'',
@@ -19,7 +20,6 @@ export default function Provider({ children }) {
 
   const [recurrenceValues] = useState(['One Off','Annual','Monthly','Biannual','Quarterly'])
 
-  // const recurrenceValues = ['One Off','Annual','Monthly','Biannual','Quarterly'];
 
   const year= [2021,2022,2023,2024,2025,2026,2027,2028,2029,2030];
 
@@ -139,7 +139,8 @@ export default function Provider({ children }) {
     modalInfos, setModalInfos,
     optionsPackage, setOptionsPackage,
     serviceStatePackage, setServiceStatePackage,
-    state,setState
+    state,setState,
+    clientRequestType, setClientRequestType
   };
   return (
     <context.Provider value={ value }>
