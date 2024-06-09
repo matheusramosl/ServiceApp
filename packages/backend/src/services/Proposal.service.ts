@@ -82,12 +82,11 @@ export default class ProposalService {
     }
   }
 
-
   async createNewProposalWithEmail(payload: any) {
     console.log(`Creating a new Proposal with email ${payload.email}...`);
     try {
-      const token = await this._service.getOauthToken('crm');
-      const services = await this.findServicesById(payload.servicesID);
+      const token = await this._service.getOauthToken("crm");
+      // const services = await this.findServicesById(payload.servicesID);
       const dueDate = new Date();
       dueDate.setDate(dueDate.getDate() + 30);
 
@@ -97,41 +96,42 @@ export default class ProposalService {
         dueDate.getMonth() + 1 < 10
           ? `0${dueDate.getMonth() + 1}`
           : dueDate.getMonth() + 1;
-      const formattedDate = dueDate.getFullYear() + '-' + month + '-' + day;
+      const formattedDate = dueDate.getFullYear() + "-" + month + "-" + day;
 
-      const incompleteObject = {
-        Due_Date: formattedDate,
-        Stage: 'Proposal Sent',
-        Proposal_Services: services.data.map((service: any) => ({
-          Service: {
-            name: service.Product_Name,
-            id: service.id,
-          },
-          Recurrence: service.Recurrence,
-          Payment_Terms:
-            service.Payment_Terms ||
-            service.Payment_Terms1 ||
-            'Upon EL Signature',
-          Service_Provider:
-            service.Service_Provider || service.Service_Provider1.join(';'),
-          Effective_Year: dueDate.getFullYear().toString(),
-          Note: service.Notes1,
-          Unit_Price: service.Unit_Price,
-          Description: service.Description,
-          Email: payload.email,
-        })),
-      };
       let proposalObject = {};
 
-      if (payload.userType === 'Lead') {
+      if (payload.userType === "Lead") {
+        const incompleteObject = {
+          Due_Date: formattedDate,
+          Stage: "Created",
+          Proposal_Services: payload.serviceArray.map((service: any) => ({
+            Service: {
+              name: service.Service_name,
+              id: service.Service_id,
+            },
+            Lead: service.Account_id,
+            Recurrence: service.Recurrence,
+            Payment_Terms:
+              service.Payment_Terms ||
+              service.Payment_Terms1 ||
+              "Upon EL Signature",
+            Service_Provider: service.Service_Provider,
+            Effective_Year: service.Effective_Year,
+            Execution_Year: service.Execution_Year,
+            Note: service.Notes1,
+            Unit_Price: service.Unit_Price,
+            Description: service.Description,
+            Email: service.email,
+          })),
+        };
         const lead = await this.findLeadByEmail(payload.email);
 
-        incompleteObject.Proposal_Services.forEach((element : any) => {
+        incompleteObject.Proposal_Services.forEach((element: any) => {
           element.Receiver = lead.Full_Name;
         });
         proposalObject = {
           ...incompleteObject,
-          Layout: { name: 'Leads Proposal', id: '4978288000036879029' },
+          Layout: { name: "Leads Proposal", id: "4978288000036879029" },
           Name: `Proposal for ${lead.Full_Name}`,
           Lead: {
             id: lead.id,
@@ -146,7 +146,30 @@ export default class ProposalService {
             Email: lead.Email,
           };
         }
-      } else if (payload.userType === 'Contact') {
+      } else if (payload.userType === "Contact") {
+        const incompleteObject = {
+          Due_Date: formattedDate,
+          Stage: "Created",
+          Proposal_Services: payload.serviceArray.map((service: any) => ({
+            Service: {
+              name: service.Service_name,
+              id: service.Service_id,
+            },
+            Account: service.Account_id,
+            Recurrence: service.Recurrence,
+            Payment_Terms:
+              service.Payment_Terms ||
+              service.Payment_Terms1 ||
+              "Upon EL Signature",
+            Service_Provider: service.Service_Provider,
+            Effective_Year: service.Effective_Year,
+            Execution_Year: service.Execution_Year,
+            Note: service.Notes1,
+            Unit_Price: service.Unit_Price,
+            Description: service.Description,
+            Email: service.email,
+          })),
+        };
         const contact = await this.findContactByEmail(payload.email);
 
         incompleteObject.Proposal_Services.forEach((element: any) => {
@@ -155,7 +178,7 @@ export default class ProposalService {
 
         proposalObject = {
           ...incompleteObject,
-          Layout: { name: 'Contacts Proposal', id: '4978288000041053168' },
+          Layout: { name: "Contacts Proposal", id: "4978288000041053168" },
           Name: `Proposal for ${contact.data.data[0].Full_Name}`,
           Contact: {
             id: contact.data.data[0].id,
@@ -173,11 +196,11 @@ export default class ProposalService {
       }
 
       const result = await axios({
-        method: 'post',
+        method: "post",
         baseURL: `https://www.zohoapis.com/crm/v2/Proposal`,
         headers: {
           Authorization: `Zoho-oauthtoken ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         data: {
           data: [
@@ -185,7 +208,7 @@ export default class ProposalService {
               ...proposalObject,
             },
           ],
-          trigger: ['approval', 'workflow', 'blueprint'],
+          trigger: ["approval", "workflow", "blueprint"],
         },
       });
       return result.data.data[0];
@@ -195,11 +218,11 @@ export default class ProposalService {
   }
 
   async findServicesById(payload: any) {
-    console.log('Finding all services by ID...');
+    console.log("Finding all services by ID...");
     try {
-      const token = await this._service.getOauthToken('crm');
+      const token = await this._service.getOauthToken("crm");
       const array = [] as any[];
-      payload.forEach((id: string , index: number) => {
+      payload.forEach((id: string, index: number) => {
         if (payload.length - 1 === index) {
           const str2 = `(id:equals:${id})`;
           array.push(str2);
@@ -209,13 +232,13 @@ export default class ProposalService {
         }
       });
       const result = await axios({
-        method: 'get',
+        method: "get",
         baseURL: `https://www.zohoapis.com/crm/v3/Products/search?criteria=(${array.join(
-          '',
+          ""
         )})`,
         headers: {
           Authorization: `Zoho-oauthtoken ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       console.log(result);
@@ -228,13 +251,13 @@ export default class ProposalService {
   async findLeadByEmail(email: string) {
     console.log(`Looking for lead with Email ${email}`);
     try {
-      const token = await this._service.getOauthToken('crm');
+      const token = await this._service.getOauthToken("crm");
       const result = await axios({
-        method: 'get',
+        method: "get",
         baseURL: `https://www.zohoapis.com/crm/v2/Leads/search?criteria=(Email:equals:${email})`,
         headers: {
           Authorization: `Zoho-oauthtoken ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       if (result) return result.data.data[0];
@@ -244,25 +267,24 @@ export default class ProposalService {
   }
 
   async findContactByEmail(email: string) {
-    const token = await this._service.getOauthToken('crm');
+    const token = await this._service.getOauthToken("crm");
     console.log(`Finding Contact on CRM with ${email}..`);
     try {
       const result = await axios({
-        method: 'get',
+        method: "get",
         baseURL: `https://www.zohoapis.com/crm/v2/contacts/search?criteria=(Email:equals:${email})`,
         headers: {
           Authorization: `Zoho-oauthtoken ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       return result as any;
     } catch (err) {
       console.error(err);
-      
     }
   }
 
   async getToken() {
-    return this._service.getOauthToken('crm')
+    return this._service.getOauthToken("crm");
   }
 }

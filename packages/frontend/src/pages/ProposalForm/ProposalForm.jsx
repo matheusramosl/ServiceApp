@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import context from '../../context/context';
 import { useNavigate } from 'react-router-dom';
 import { handleZohoRequest } from '../../requests/handleZohoRequests';
+import ClientSearchableSelect from './components/ClientSearchableSelect';
 
 
 function ProposalForm() {
@@ -71,6 +72,8 @@ function ProposalForm() {
       })
     }
   }
+  const select = state.clientType === 'Lead' ? state.Lead.map((lead, index) => ({value:lead.id, label: `${lead.First_Name || ""} ${lead.Last_Name}`})) : state.Contact.map((contact, index) => ({value:contact.id, label: `${contact.First_Name || ""} ${contact.Last_Name}`}))
+
   const removeSigaory = (item) => {
     setState({
       ...state,
@@ -95,17 +98,23 @@ function ProposalForm() {
 
     {state.clientType && (state.clientType === 'Lead' ?       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Lead</label>
-        <select name='client' onChange={(change) => addClient(change)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+        {/* <select name='client' onChange={(change) => addClient(change)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <option value=''>Select Lead</option>
           {state.Lead.map((lead,index) => <option key={index}>{`${lead.First_Name} ${lead.Last_Name}`}</option>)}
-        </select>
+        </select> */}
+        <ClientSearchableSelect 
+        props = {select}
+        />
       </div> : <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Contact</label>
-        <select name='client' onChange={(change) => addClient(change)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+        {/* <select name='client' onChange={(change) => addClient(change)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <option value=''>Select Contact</option>
           {state.Contact.map((contact, index) => <option key={index} >{`${contact.First_Name} ${contact.Last_Name}`}</option>)}
 
-        </select>
+        </select> */}
+        <ClientSearchableSelect 
+        props = {select}
+        />
       </div>)}
 
       <div className="mb-4">
@@ -128,6 +137,7 @@ function ProposalForm() {
           <option>USD</option>
           <option>BRL</option>
         </select>
+        
       </div>
       
 

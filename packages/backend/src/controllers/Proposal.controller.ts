@@ -17,13 +17,13 @@ export default class ProposalController {
 
   public async getServices(_req: Request, res: Response) {
     const services = await this._service.findAllServices();
-   
+
     res.status(200).json({ services });
   }
   public async getAccounts(_req: Request, res: Response) {
     const accounts = await this._service.findAllAccounts();
     console.log(accounts);
-    
+
     res.status(200).json({ accounts });
   }
 
@@ -55,12 +55,18 @@ export default class ProposalController {
     res.status(200).json({ packages });
   }
   public async createProposalWithEmail(req: Request, res: Response) {
-    const proposal = await this._service.createNewProposalWithEmail(req.body)
-    res.status(200).json({proposal})
+    try {
+      const proposal = await this._service.createNewProposalWithEmail(req.body);
+      console.log(proposal);
+      res.status(200).json({ proposal });
+    } catch (error: any) {
+      console.log(error);
+      res.status(500).json(error.message);
+    }
   }
   public async getToken(req: Request, res: Response) {
-    const token = await this._service.getToken()
-    
-    res.status(200).json(token)
+    const token = await this._service.getToken();
+
+    res.status(200).json(token);
   }
 }

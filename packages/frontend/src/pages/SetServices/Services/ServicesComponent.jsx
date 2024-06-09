@@ -14,24 +14,24 @@ export default function ServicesComponent() {
 
 const getAllServices = async () => {
   
-   const servicos = await handleZohoRequest('services')
-  const servicesMapped = servicos.map((service) => ({
-    Name: service.Product_Name || 'Name',
-    id: service.id || '',
-    Amount: service.Unit_Price || '0',
-    Type: 'service',
-    description: service.Description || '',
-    Recurrence: service.Recurrence || 'One Off', 
-    Parent: service.Service_Account || 'Service_Account',
-    serviceAccount: {} || 'Select Servcie Account',
-    paymentTerms: service.Payment_Terms1 || 'Upon delivery of draft report',
-    usState: service.US_State || '',
-    competenceYear: service.Competence_Year || '2024',
-    executionYear: service.Execution_Year || '2024',
-    providers: service.Provider_Receiver || 'Drummond CPA LLC',
-    quantity: '1'
-  }))
-  setOptions(servicesMapped)
+  //  const servicos = await handleZohoRequest('services')
+  // const servicesMapped = servicos.map((service) => ({
+  //   Name: service.Product_Name || 'Name',
+  //   id: service.id || '',
+  //   Amount: service.Unit_Price || '0',
+  //   Type: 'service',
+  //   description: service.Description || '',
+  //   Recurrence: service.Recurrence || 'One Off', 
+  //   Parent: service.Service_Account || 'Service_Account',
+  //   serviceAccount: {} || 'Select Servcie Account',
+  //   paymentTerms: service.Payment_Terms1 || 'Upon delivery of draft report',
+  //   usState: service.US_State || '',
+  //   competenceYear: service.Competence_Year || '2024',
+  //   executionYear: service.Execution_Year || '2024',
+  //   providers: service.Provider_Receiver || 'Drummond CPA LLC',
+  //   quantity: '1'
+  // }))
+  // setOptions(servicesMapped)
   }
 
   useEffect(() => {
