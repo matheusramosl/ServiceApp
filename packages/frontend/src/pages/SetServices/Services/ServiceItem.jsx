@@ -1,5 +1,4 @@
 import React, { useContext,useState, useEffect } from 'react'
-import DrawerServices from './components/DrawerServices'
 import DropdownMenu from '../../../components/MoreComponent'
 import context from '../../../context/context'
 import { handleZohoRequest } from '../../../requests/handleZohoRequests'
@@ -22,13 +21,18 @@ function ServiceItem({props}) {
 
   useEffect(() => {
     const fetchAccounts = async () => {
-      const accounts = await handleZohoRequest('accounts');
-      setOptionsAcc(accounts);
-      console.log(accounts);
+    if(state.clientType === 'Contact'){
+      const clients = await handleZohoRequest('accounts');
+      setOptionsAcc(clients);
+      console.log(clients);
+    }else{
+        const clients = state.Lead;
+        setOptionsAcc(clients);
+        console.log(clients);
     };
-    console.log('service item');
-    console.log(selectOptions);
-    console.log(props);
+
+  }
+
 
     fetchAccounts();
   }, []);
@@ -52,8 +56,8 @@ function ServiceItem({props}) {
 
   };
  
-  const select = optionsAcc.accounts.map((account, index) => ({value:account.id, label: account.Account_Name}))
-  
+  const select = state.clientType === 'Contact' ? optionsAcc.accounts.map((account, index) => ({value:account.id, label: account.Account_Name})) : state.Lead.map((lead, index) => ({value:lead.id, label: `${lead.First_Name || ""} ${lead.Last_Name}`}))
+
   return (
     <div className="bg-white p-4 border shadow m-3"
        onMouseEnter={() => setIsVisible(true)}
