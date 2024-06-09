@@ -14,7 +14,6 @@ function Total({props}) {
      
     arr.forEach(element => {
        const amount = parseFloat(element.amount);
-       console.log(amount)
         if(element.recurrence === "One Off" || element.recurrence === "Annual" ){
             totalAnnual = amount
         }
@@ -35,14 +34,10 @@ function Total({props}) {
         }
             soma += totalAnnual;
     });
-    console.log('soma')
-    console.log(soma)
     return parseFloat(soma).toFixed(2);
     }
 
     const {state} = useContext(context)
-    console.log('total')
-    console.log(props)
     const total = parseFloat(props.totalSelect).toFixed(2);
     const annualTotal = annualTotalCalc(props.objServices);
 

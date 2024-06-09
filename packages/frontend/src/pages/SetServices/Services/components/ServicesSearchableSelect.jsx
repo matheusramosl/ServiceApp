@@ -9,6 +9,8 @@ export default function ServicesSearchableSelect(props){
     serviceAccount: ''
   });
 
+  let valueDefault = {value: state.serviceAccId[0], label: state.serviceAccName[0]};
+
   const handleOptionChange = (event) => {
     console.log(event)
     console.log(props)
@@ -28,8 +30,9 @@ export default function ServicesSearchableSelect(props){
     };
 
     setSelectedOptions(updatedOptions);
-
+    valueDefault = {value: event.value, label: event.label};
     console.log('new');
+    console.log(valueDefault);
     console.log(updatedOptions);
 
   };
@@ -38,7 +41,7 @@ export default function ServicesSearchableSelect(props){
     <Select 
     options =  {props.props.select}
     onChange = {handleOptionChange}
-    value = {{value: state.serviceAccId[0], label: state.serviceAccName[0]} }
+    defaultValue = {valueDefault}
     />
   )
   return (
