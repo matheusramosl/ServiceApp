@@ -9,15 +9,14 @@ function ServiceItem({props}) {
 
   const [modalOptions, setModalOptions] = useState({
     Recurrence: props.Recurrence,
-    competenceYear: props.competenceYear || 2024, 
-    serviceAccount: {}
+    competenceYear: props.competenceYear || 2024
   });
 
   const {Name, Amount, Recurrence, Parent,serviceAccount} = props
   const { selectOptions,setSelectedOptions,state} = useContext(context)
   const [isVisible, setIsVisible] = useState(false);
   const recValues = ['One Off','Annual','Monthly','Biannual', 'Quarterly']
-  const year= [2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
+  const year= ['2021','2022','2023','2024','2025','2026','2027','2028','2029','2030']
   const [optionsAcc, setOptionsAcc] = useState({accounts:[{}]})
   
 
@@ -44,17 +43,16 @@ function ServiceItem({props}) {
 
     updatedOptions[props.index] = {
       ...selectOptions[props.index], 
-      ...modalOptions, 
+      [event.target.name]: event.target.value, 
     };
 
     setSelectedOptions(updatedOptions);
-
-    console.log('new');
-    console.log(selectOptions);
+    console.log("select options")
+    console.log(selectOptions)
 
   };
  
-  const select = optionsAcc.accounts.map((account, index) => ({value:account.Account_Name?.name, label: account.Account_Name?.name}))
+  const select = optionsAcc.accounts.map((account, index) => ({value:account.id, label: account.Account_Name}))
   
   return (
     <div className="bg-white p-4 border shadow m-3"
@@ -76,24 +74,24 @@ function ServiceItem({props}) {
       
         <div className="col-span-2">
           <ServicesSearchableSelect
-           props = {select}
+           props = {{select,index:props.index}}
            />
            </div>
 
         <div className="col-span-1">
-          <select id="rec" name='Recurrence' defaultValue={selectOptions[props.index].Recurrence} className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm" onChange={handleOptionChange}>
+          <select id="rec" name='Recurrence' value={selectOptions[props.index].Recurrence} className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm" onChange={handleOptionChange}>
           {recValues.map((recurrence) => (
             <option key={recurrence} value={recurrence}>
-              { selectOptions[props.index].Recurrence}
+              { recurrence  }
             </option>
           ))}
           </select>
         </div>
         <div className="col-span-1">
-          <select id="year" name='competenceYear' defaultValue={selectOptions[props.index].competenceYear|| 2024} className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm" onChange={handleOptionChange}>
+          <select id="year" name='competenceYear' value={selectOptions[props.index].competenceYear || 2024} className="rounded form-select block w-full mt-1 border-gray-300 shadow-sm" onChange={handleOptionChange}>
           {year.map((year) => (
             <option key={year} value={year}>
-              {selectOptions[props.index].competenceYear }
+              {year }
             </option>
           ))}
           </select>
@@ -102,7 +100,7 @@ function ServiceItem({props}) {
           <input type="number" name='quantity' defaultValue={selectOptions[props.index].quantity} className="rounded form-input mt-1 block w-full border-gray-300 shadow-sm text-center" onChange={handleOptionChange}/>
         </div>
         <div className="col-span-1 text-right text-xl px-8">
-          <span>{state.currency === 'BRL'? 'R$': '$' } {selectOptions[props.index].Amount}</span>
+          <span>{state.currency === 'BRL'? 'R$': '$' } {parseFloat(selectOptions[props.index].Amount).toFixed(2)}</span>
         </div>
       </div>
     </div>

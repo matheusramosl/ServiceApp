@@ -20,7 +20,7 @@ function ServiceItemModal({props, closeModal}) {
   const { selectOptions, setSelectedOptions, state} = useContext(context)
   const {Name, Amount ,Recurrence, paymentTerms,index} = props.props
   const recurrenceValues = ['One Off','Annual','Monthly','Biannual','Quarterly']
-  const year= [2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
+  const year= ['2021','2022','2023','2024','2025','2026','2027','2028','2029','2030']
   const paymentTerm = [
     'Upon EL Signature',
     'Upon Service Delivery',
@@ -134,18 +134,18 @@ function ServiceItemModal({props, closeModal}) {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-8 w-5/12 min-h-min flex flex-col self-center md:flex text-base-content z-50">
+    <div className="bg-white shadow-lg rounded-lg p-8 w-4/12 min-h-min flex flex-col self-center md:flex text-base-content z-50">
       <div className="flex justify-between items-center mb-6 md:shrink-0">
         <div className="text-gray-800 font-semibold">{Name}</div>
         <div className=''>
 
-        <button onClick={closeModal} className={`bg-red-500 md:h-full md:w-48 hover:bg-red-400 text-white font-semibold border border-gray-400 rounded shadow px-1`}>x</button>
+        <button onClick={closeModal} className={`bg-red-500 md:h-full md:w-6 hover:bg-red-400 text-white font-semibold border border-gray-400 rounded shadow px-1`}>x</button>
         </div>
       </div>
 
-        <div className='flex flex-wrap'>
+        <div className='flex flex-wrap px-8'>
 
-        <div className="col-span-11 mb-2 w-1/2">
+        <div className="col-span-11 mb-2 w-1/2 px-1">
         <label className="form-control w-full max-w-xs">
           <div className="label">
             <span className="label-text">Quantity</span>
@@ -156,7 +156,7 @@ function ServiceItemModal({props, closeModal}) {
           </label>
         </div>
 
-        <div className="col-span-1 mb-2 w-1/2">
+        <div className="col-span-1 mb-2 w-1/2 px-1">
 
         <label className="form-control w-full max-w-xs">
           <div className="label ">
@@ -173,7 +173,7 @@ function ServiceItemModal({props, closeModal}) {
         </div>
 
 
-        <div className="col-span-1 mb-2 w-1/2">
+        <div className="col-span-1 mb-2 w-1/2 px-1">
 
         <label className="form-control w-full max-w-xs">
           <div className="label">
@@ -189,7 +189,7 @@ function ServiceItemModal({props, closeModal}) {
           </label>
         </div>
 
-        <div className="col-span-1 mb-2 w-1/2">
+        <div className="col-span-1 mb-2 w-1/2 px-1">
 
         <label className="form-control w-full max-w-xs">
           <div className="label">
@@ -205,7 +205,7 @@ function ServiceItemModal({props, closeModal}) {
           </label>
         </div>
 
-        <div className="col-span-1 mb-2 w-1/2">
+        <div className="col-span-1 mb-2 w-1/2 px-1">
         <label className="form-control w-full max-w-xs">
           <div className="label">
             <span className="label-text">Competence Year</span>
@@ -220,7 +220,7 @@ function ServiceItemModal({props, closeModal}) {
           </label>
         </div>
 
-        <div className="col-span-1 mb-2 w-1/2">
+        <div className="col-span-1 mb-2 w-1/2 px-1">
           <label className="form-control w-full max-w-xs">
           <div className="label">
             <span className="label-text">Execution Year</span>
@@ -235,7 +235,7 @@ function ServiceItemModal({props, closeModal}) {
           </label>
         </div>
 
-        <div className="col-span-1 mb-2 w-1/2">
+        <div className="col-span-1 mb-2 w-1/2 px-1">
 
         <label className="form-control w-full max-w-xs">
           <div className="label">
@@ -250,7 +250,7 @@ function ServiceItemModal({props, closeModal}) {
           </select>
           </label>
         </div>
-        <div className="col-span-1 mb-2 w-1/2">
+        <div className="col-span-1 mb-2 w-1/2 px-1">
 
         <label className="form-control w-full max-w-xs">
           <div className="label">
@@ -258,12 +258,12 @@ function ServiceItemModal({props, closeModal}) {
           </div>
           <label className="input input-bordered flex items-center">
           {state.currency === 'BRL'? 'R$': '$' }
-            <input type="text" name='Amount' className="rounded form-input mt-1 block w-full border-gray-300 shadow-sm text-center" placeholder="Amount" defaultValue={Amount} onChange={handleOptionChange}/>
+            <input type="text" name='Amount' className="flex justify-start rounded form-input mt-1 block w-full border-gray-300 shadow-sm text-center" placeholder="Amount" defaultValue={`${parseFloat(Amount).toFixed(2)}`} onChange={handleOptionChange}/>
           </label>
           </label>
         </div>
       </div>
-      <div className='pt-4'>
+      <div className='pt-4 px-8'>
 
           <ServiceDescriptionItem props={index} />
       </div>
