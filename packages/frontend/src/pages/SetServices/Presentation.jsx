@@ -14,15 +14,17 @@ export default function Presentation() {
   const getTotal = () => {
     if (Array.isArray(selectOptions)) {
       console.log(selectOptions)
-      const allServices = selectOptions.filter((i) => i.Type === 'service').reduce((acc, curr) => curr.Amount + acc, 0);
-      const allPackages = selectOptions.filter((i) => i.Type === 'package').reduce((acc, curr) => curr.Amount + acc, 0);
-      return allPackages + allServices;
+      const allServices = selectOptions.filter((i) => i.Type === 'service').reduce((acc, curr) => parseFloat(curr.Amount) + parseFloat(acc), 0);
+      const allPackages = selectOptions.filter((i) => i.Type === 'package').reduce((acc, curr) => parseFloat(curr.Amount) + parseFloat(acc), 0);
+      return parseFloat(allPackages) + parseFloat(allServices);
     } else {
       // Handle the case where selectOptions is not an array (optional)
       console.error('selectOptions is not an array in Presentation component');
       return 0; // Or return a default value
     }
 } 
+
+const objServices = selectOptions.map((values, index) => ({amount:values.Amount, recurrence: values.Recurrence}))
 
   const verifyComponent = () => {
     switch (serviceType) {
@@ -87,7 +89,8 @@ export default function Presentation() {
 
 const verifyTotal = () => {
   if(serviceType){
-    return <Total props={getTotal()}/>
+    const totalSelect = getTotal();
+    return <Total props={{totalSelect,objServices}}/>
   }
 }
 

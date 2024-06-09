@@ -10,10 +10,10 @@ export default class ZohoService {
   async findAllServices() {
     console.log(`Looking for all CRM Account`);
     try {
-      const token = await this.getOauthToken('crm')
+      const token = await this.getOauthToken("crm");
       const result = await axios({
         method: "get",
-        url: `https://www.zohoapis.com/crm/v3/Products?fields=Recurrence,Payment_Terms,Unit_Price,Service_Provider1,Description,Notes1,Product_Name`,
+        url: `https://www.zohoapis.com/crm/v3/Products/search?criteria=(Product_Active:equals:true)and(Package_Service:equals:false)`,
         headers: {
           Authorization: `Zoho-oauthtoken ${token}`,
           "Content-Type": "application/json",
@@ -24,11 +24,11 @@ export default class ZohoService {
       console.error(err);
     }
   }
-
+  //?criteria=(Product_Active:equals:true)and(Package_Service:equals:false)
   async findAllPackages() {
     console.log(`Looking for all CRM Account`);
     try {
-      const token = await this.getOauthToken('crm')
+      const token = await this.getOauthToken("crm");
       const result = await axios({
         method: "get",
         url: `https://www.zohoapis.com/crm/v3/Packages`,
@@ -46,7 +46,7 @@ export default class ZohoService {
   async findAllLeads() {
     console.log(`Looking for all CRM Account`);
     try {
-      const token = await this.getOauthToken('crm')
+      const token = await this.getOauthToken("crm");
       const result = await axios({
         method: "get",
         url: `https://www.zohoapis.com/crm/v3/Leads?fields=First_Name,Last_Name,Email`,
@@ -65,7 +65,7 @@ export default class ZohoService {
     console.log(`Looking for all CRM Account`);
     try {
       const parent = encodeURIComponent("Parent Account");
-      const token = await this.getOauthToken('crm')
+      const token = await this.getOauthToken("crm");
       const result = await axios({
         method: "get",
         url: `https://www.zohoapis.com/crm/v3/Accounts/search?criteria=(Account_Type:equals:${parent})`,
@@ -83,10 +83,10 @@ export default class ZohoService {
   async findAllAccounts() {
     console.log(`Looking for all CRM Account`);
     try {
-      const token = await this.getOauthToken('crm')
+      const token = await this.getOauthToken("crm");
       const result = await axios({
         method: "get",
-        url: `https://www.zohoapis.com/crm/v3/Accounts`,
+        url: `https://www.zohoapis.com/crm/v3/Accounts?fields=Account_Name,Main_Contact,Account_Type,Parent_Account`,
         headers: {
           Authorization: `Zoho-oauthtoken ${token}`,
           "Content-Type": "application/json",
@@ -94,7 +94,6 @@ export default class ZohoService {
       });
       return result.data.data;
     } catch (err: any) {
-
       console.error(err);
     }
   }
@@ -102,7 +101,7 @@ export default class ZohoService {
   async findAllContacts() {
     console.log(`Looking for all CRM Account`);
     try {
-      const token = await this.getOauthToken('crm')
+      const token = await this.getOauthToken("crm");
       const result = await axios({
         method: "get",
         url: `https://www.zohoapis.com/crm/v3/Contacts?fields=Last_Name,First_Name,Account_Name,Email`,
@@ -120,7 +119,7 @@ export default class ZohoService {
   async createProposal(data: any) {
     console.log(`Createing proposal CRM`);
     try {
-      const token = await this.getOauthToken('crm')
+      const token = await this.getOauthToken("crm");
       const result = await axios({
         method: "get",
         url: `https://www.zohoapis.com/crm/v3/Contacts?fields=Last_Name,First_Name,Account_Name,Email`,
@@ -135,7 +134,6 @@ export default class ZohoService {
     }
   }
   async getOauthToken(service: string) {
-   
     const result = await axios({
       method: "get",
       url: ` https://us-central1-drummond-tech-apis.cloudfunctions.net/getAccessToken/${service}`,
@@ -143,6 +141,6 @@ export default class ZohoService {
         "Content-Type": "application/json",
       },
     });
-    return result.data
+    return result.data;
   }
 }

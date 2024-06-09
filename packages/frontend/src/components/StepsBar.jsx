@@ -11,13 +11,16 @@ export default function StepsBar() {
   const {pathname} = useLocation()
   const {selectOptions, state, clientRequestType} = useContext(context)
   const [sendProposal, setSendProposal] = useState(true)
+  const [saved, setSaved] = useState(false)
 
   const createProposal = async () => {
     const serviceArray = [];
     selectOptions.forEach((item) => {
       const serviceObject = {
-        Service: item.id,
-        Recurrence1: item.Recurrence,
+        Service_id: item.id,
+        Service_name: item.Name,
+        Account_id:item.serviceAccount,
+        Recurrence: item.Recurrence,
         Effective_Year: item.competenceYear,
         Execution_Year: item.executionYear,
         Payment_Terms: item.paymentTerms,
@@ -33,19 +36,23 @@ export default function StepsBar() {
     });
     
     const payload =  {
-      "email": state.signatoryEmails[0],
+      "email": state.primarySignatory[0],
       "servicesID": serviceArray.map((i) => i.Service),
-      "userType": state.clientType
+      "userType": state.clientType,
+      "serviceArray":serviceArray
   }
   try {
     await axios.post('http://localhost:3001/proposal/createByEmail', payload)
     setSendProposal(false)
+    setSaved(true)
+
   } catch (error) {
     console.error(error);
   }
   }
 
 const verifyNavigate = (type) => {
+  console.log(selectOptions)
   if(type === 'next') {
     return !pathname.includes('services') ? '/services' : '/send'
   } else {
@@ -73,7 +80,7 @@ const verifyNavigate = (type) => {
           }
         {
           (pathname.includes('send') && selectOptions.length > 0) &&
-          (sendProposal && <button className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-2 px-4 rounded" onClick={() => createProposal()}>Send</button>)
+          (sendProposal && <button className="bg-drummond-primary hover:bg-drummond-secondary-400 text-white font-bold py-2 px-4 rounded" onClick={() => createProposal()}>Save</button>)
         }
       </div>
     </div>
