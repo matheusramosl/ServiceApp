@@ -1,33 +1,46 @@
 const leadMock = [
-    {
-      First_Name: "",
-      Email: "opitol@me.com",
-      Last_Name: "Oswaldo Pitol",
-      id: "4978288000132046067",
-    },
-    {
-      First_Name: "",
-      Email: "fellipeandre@cannect.com.br",
-      Last_Name: "Fellipe André Andrade",
-      id: "4978288000132046042",
-    },
-    {
-      First_Name: "",
-      Email: "ramon.nunes@arca.com.br",
-      Last_Name: "Ramon Nunes",
-      id: "4978288000132046001",
-    },
-    {
-      First_Name: "",
-      Email: null,
-      Last_Name: "Kai",
-      id: "4978288000132042001",
-    },
-    {
-      First_Name: "",
-      Email: "e.cristian@hotmail.com",
-      Last_Name: "Nogueira Eduardo",
-      id: "4978288000132013777",
-    },
-  ]
-  export default leadMock
+  {
+    First_Name: "John",
+    Email: "john.doe@example.com",
+    Last_Name: "Doe",
+    id: "1234567890123456789",
+  },
+  {
+    First_Name: "Jane",
+    Email: "jane.smith@example.org",
+    Last_Name: "Smith",
+    id: "9876543210987654321",
+  },
+  {
+    First_Name: "Alice",
+    Email: "alice.wonderland@fictional.com",
+    Last_Name: "Wonderland",
+    id: "1122334455667788990",
+  },
+  {
+    First_Name: "Bob",
+    Email: null,
+    Last_Name: "Builder",
+    id: "0099887766554433221",
+  },
+  {
+    First_Name: "Charlie",
+    Email: "charlie.brown@peanuts.com",
+    Last_Name: "Brown",
+    id: "6677889900112233445",
+  },
+  {
+    First_Name: "Eve",
+    Email: "eve.angel@example.net",
+    Last_Name: "Angel",
+    id: "5544332211009988776",
+  },
+  {
+    First_Name: "Oscar",
+    Email: "oscar.grouch@sesamestreet.org",
+    Last_Name: "Grouch",
+    id: "4433221100998877665",
+  },
+];
+
+export default leadMock;

@@ -33,16 +33,12 @@ export default class ProposalController {
   }
 
   public async getContacts(_req: Request, res: Response) {
+    console.log("controller");
     const contacts = await this._service.findAllContacts();
 
     res.status(200).json({ contacts });
   }
 
-  // public async getParentAccounts(_req: Request, res: Response) {
-  //     const contacts = await this._service.findAllContacts()
-
-  //     res.status(200).json({contacts})
-  // }
   public async getPackages(_req: Request, res: Response) {
     const packages = await this._service.findAllPackages();
 
@@ -53,20 +49,5 @@ export default class ProposalController {
     const packages = await this._service.createProposal(req.body);
 
     res.status(200).json({ packages });
-  }
-  public async createProposalWithEmail(req: Request, res: Response) {
-    try {
-      const proposal = await this._service.createNewProposalWithEmail(req.body);
-      console.log(proposal);
-      res.status(200).json({ proposal });
-    } catch (error: any) {
-      console.log(error);
-      res.status(500).json(error.message);
-    }
-  }
-  public async getToken(req: Request, res: Response) {
-    const token = await this._service.getToken();
-
-    res.status(200).json(token);
   }
 }
