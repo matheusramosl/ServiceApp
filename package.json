@@ -1,17 +1,23 @@
 {
-  "name": "proposal-crm-frontend",
+  "name": "proposal-frontend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "install": "(cd ./packages/frontend && npm install) && (cd ./packages/backend && npm install)",
     "start:back": "cd ./packages/backend && npm start",
-    "start:front": "cd ./packages/frontend && npm start"
+    "start:front": "cd ./packages/frontend && npm start",
+    "test": "jest --passWithNoTests"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "react-modal": "^3.16.1",
     "react-select": "^5.8.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5"
   }
 }
